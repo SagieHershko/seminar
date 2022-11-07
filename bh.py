@@ -14,6 +14,7 @@ class BH:
       for x in range(10**(self.__numberOfDigits-1),
                      10**self.__numberOfDigits):
         s1 = str(x)
+
         s2 = set(s1)
         if not Zero and "0" in s1:
             continue
