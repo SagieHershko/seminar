@@ -15,7 +15,10 @@ def canvas_Click_event(self):
 #     y1 = y + r
 #     return canvas.create_oval(x0, y0, x1, y1)
 
-root = Tk()
+root = tk.Tk()
+root.attributes('-topmost', True)
+root.geometry("500x500")
+
 """canvasArray=[]
 for i in COLORS:
     canvas = Canvas(root,width=200, height=200, bg='white')
