@@ -1,6 +1,8 @@
 # author: itzhik aviv
 import random
 import sys
+from tkinter import *
+
 NumberOfGames = 10
 NumberOfDigits = 4
 Number = 0
@@ -79,7 +81,7 @@ class BH:
             self.__createTable()
             self.__createTheNumber()
           else:
-            self.__Number = str(number)
+            self.__Number__createTheNumber = str(number)
             self.__number = self.__Number
             self.__numberOfDigits = len(self.__number)
             if not Zero and "0" in self.__Number:
@@ -119,9 +121,14 @@ class BH:
         return self.__counter
 
 def main():
+    root = Tk()
+    gameNum=1
+    gameLabel = Label(root, text="\ngame number " + str(gameNum))
+    gameLabel.pack(side="top")
     sys.stdout = open("bhOutput.txt", 'w')
     l = []
     for i in range(NumberOfGames):
+       gameNum+=1
        print("\ngame number ", str(i+1))
        bh = BH(number=Number, numberOfDigits=NumberOfDigits)
        l.append(bh.getCounter())
@@ -129,6 +136,7 @@ def main():
           str(NumberOfGames), " games is: ", \
           sum(l)/len(l))
     sys.stdout.close()
+    root=mainloop()
 
 main()
 
