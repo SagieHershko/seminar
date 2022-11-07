@@ -27,15 +27,10 @@ for i in COLORS:
     canvasArray.append(canvas)
     # canvas.grid(row=0,column=i)"""
 
-T = Text(root, height = 5, width = 52)
-T.pack()
-
 var = StringVar()
-label = Label( root, textvariable=var, relief=RAISED)
-
-
-var.set("game number :")
-label.pack()
+gameNum = 1
+gameLabel = Label(root, text="\ngame number " + str(gameNum))
+gameLabel.pack(side="top")
 
 root.mainloop()
 
