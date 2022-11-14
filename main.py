@@ -43,15 +43,39 @@ currentGuessLabel = Label(root, text="guess:")
 nbLabel = Label(root, text="nb:")
 nhLabel = Label(root, text="nh:")
 spaceLabel = Label(root, text="                     ")
-b1=Button(root,text='button1',command=lambda:hide_widget(nhLabel))
 
-def hide_widget(widget):
-   widget.destroy()
+count=0
+# def add_line():
+#     global count
+#     count+=1
+#     if(count<=1):
+#         tk.Label(text='Label %d'% count +'Label %d'% count+'Label %d'% count+'Label %d'% count).pack(side=)
+#         tk.Label(text='Label %d'% count +'Label %d'% count+'Label %d'% count+'Label %d'% count).pack(side=RIGHT)
+#     else:
+#         tk.Label(text='').pack(side=TOP)
+
+
+
+
+
+    # tk.Label(text="").pack(side=tk.CENTER)
+
+
+
+# tk.Button(root,text='button1',command=add_line).pack()
+
 
 guessNumberLabel2 = Label(root, text="guessNum:")
 currentGuessLabel2 = Label(root, text="guess:")
 nbLabel2 = Label(root, text="nb:")
 nhLabel2 = Label(root, text="nh:")
+
+
+def democolorChange():b1.configure(bg="red",fg="yellow")
+
+
+
+b1=Button(root,text='button1',command=democolorChange)
 
 
 # grid method to arrange labels in respective
