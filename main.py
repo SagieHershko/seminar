@@ -35,7 +35,50 @@ var = StringVar()
 gameNum = 1
 gameLabel = Label(root, text="\nNumber of games " + str(NumberOfGames))
 
-gameLabel.pack(side="top")
+numberToGuess1=Label(root,text=str(SecretNumber))
+numberToGuess2=Label(root,text=str(SecretNumber))
+
+guessNumberLabel = Label(root, text="guessNum:")
+currentGuessLabel = Label(root, text="guess:")
+nbLabel = Label(root, text="nb:")
+nhLabel = Label(root, text="nh:")
+spaceLabel = Label(root, text="                     ")
+b1=Button(root,text='button1',command=lambda:hide_widget(nhLabel))
+
+def hide_widget(widget):
+   widget.destroy()
+
+guessNumberLabel2 = Label(root, text="guessNum:")
+currentGuessLabel2 = Label(root, text="guess:")
+nbLabel2 = Label(root, text="nb:")
+nhLabel2 = Label(root, text="nh:")
+
+
+# grid method to arrange labels in respective
+# rows and columns as specified
+numberToGuess1.grid(row=0, column=1, sticky="", pady=2, columnspan=1)
+numberToGuess2.grid(row=0, column=6, sticky="", pady=2,columnspan=1)
+
+guessNumberLabel.grid(row=1, column=0, sticky=W, pady=2)
+currentGuessLabel.grid(row=1, column=1, sticky=W, pady=2)
+nbLabel.grid(row=1, column=3, sticky=W, pady=2)
+nhLabel.grid(row=1, column=4, sticky=W, pady=2)
+b1.grid(row=3, column=5, sticky=W, pady=2)
+
+spaceLabel.grid(row=1, column=5, sticky=W, pady=2)
+
+guessNumberLabel2.grid(row=1, column=6, sticky=E, pady=2)
+currentGuessLabel2.grid(row=1, column=7, sticky=E, pady=2)
+nbLabel2.grid(row=1, column=8, sticky=E, pady=2)
+nhLabel2.grid(row=1, column=9, sticky=E, pady=2)
+
+# entry widgets, used to take entry from user
+
+# this will arrange entry widgets
+
+
+#gameLabel.pack(side="top")
+
 
 root.mainloop()
 

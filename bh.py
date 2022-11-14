@@ -6,6 +6,7 @@ from tkinter import *
 NumberOfGames = 10
 NumberOfDigits = 4
 Number = 0
+SecretNumber=0
 Zero = True
 
 class BH:
@@ -99,6 +100,7 @@ class BH:
               " table size: ", len(self.__L))
         while True:
             self.__number = self.__Number
+            SecretNumber=self.__number
             self.__counter += 1
             self.__createGuess()
             self.__findBH()
