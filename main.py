@@ -1,6 +1,7 @@
 from enum import Enum
 import tkinter as tk
 from tkinter import *
+from bh import *
 
 COLORS=['blue','green','red','purple','yellow']
 
@@ -32,7 +33,8 @@ for i in COLORS:
 
 var = StringVar()
 gameNum = 1
-gameLabel = Label(root, text="\ngame number " + str(gameNum))
+gameLabel = Label(root, text="\nNumber of games " + str(NumberOfGames))
+
 gameLabel.pack(side="top")
 
 root.mainloop()

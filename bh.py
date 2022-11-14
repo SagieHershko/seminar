@@ -124,7 +124,7 @@ def main():
     sys.stdout = open("bhOutput.txt", 'w')
     l = []
     for i in range(NumberOfGames):
-       print("\ngame number ", str(i+1))
+       print("\ngame number ", str(i+1)) ##send parameter to fucntion which set the label of game number played
        bh = BH(number=Number, numberOfDigits=NumberOfDigits)
        l.append(bh.getCounter())
     print("average number of guesses for ", \
