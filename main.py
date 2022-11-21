@@ -12,17 +12,17 @@ root.geometry("500x500")
 
 
 COLORS=['blue','green','red','purple','yellow']
-listData=[('Guess','NumberGuessed ','Bh ','Nh ','Guess','NumberGuessed ','Bh ','Nh'),
-          (1,"","","","","","",""),
-          (2,"","","","","","",""),
-          (3,"","","","","","",""),
-          (4,"","","","","","",""),
-          (5,"","","","","","",""),
-          (6,"","","","","","",""),
-          (7,"","","","","","",""),
-          (8,"","","","","","",""),
-          (9,"","","","","","",""),
-          (10,"","","","","","","")]
+listData=[('Guess','NumberGuessed ','Bh ','Nh ','NumberGuessed ','Bh ','Nh'),
+          (1,"","","","","",""),
+          (2,"","","","","",""),
+          (3,"","","","","",""),
+          (4,"","","","","",""),
+          (5,"","","","","",""),
+          (6,"","","","","",""),
+          (7,"","","","","",""),
+          (8,"","","","","",""),
+          (9,"","","","","",""),
+          (10,"","","","","","")]
 
 def disable_entry(e):
    e.config(state= "disabled")
@@ -30,12 +30,15 @@ def disable_entry(e):
 
 def createGameTable():
     for i in range(NumberOfGames):
-        for j in range(8):
-            ##
-            e = Entry(test, width=15, fg='blue', font=('Arial', 12, 'bold'))
+        for j in range(7):
+            if(j>3):
+               e = Entry(test, width=15, fg='red', font=('Arial', 12, 'bold'))
+            else:
+               e = Entry(test, width=15, fg='blue', font=('Arial', 12, 'bold'))
             e.grid(row=i,column=j)
             e.insert(END,listData[i][j])
-            disable_entry(e)
+
+
 
             # e.insert(END,listData[])
 
