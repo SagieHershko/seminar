@@ -44,11 +44,12 @@ def createGameTable():
                e = Entry(test, width=15, fg='blue', font=('Arial', 12, 'bold'))
             e.grid(row=i,column=j)
             e.insert(END,listData[i][j])
-            disable_entry(e)
-            if( j>0 and j<=3):
-                color_bg1(e)
-            else:
-                color_bg2(e)
+            if(i>0):
+                disable_entry(e)
+            # if( j>0 and j<=3):
+            #     color_bg1(e)
+            # else:
+            #     color_bg2(e)
 
             # e.insert(END,listData[])
 
