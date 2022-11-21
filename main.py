@@ -7,8 +7,8 @@ from bh import *
 
 
 root = tk.Tk()
-root.attributes('-topmost', True)
-root.geometry("500x500")
+# root.attributes('-topmost', True)
+# root.geometry("500x500")
 
 
 COLORS=['blue','green','red','purple','yellow']
@@ -28,6 +28,12 @@ listData=[('Guess','NumberGuessed ','Bh ','Nh ','NumberGuessed ','Bh ','Nh'),
 def disable_entry(e):
    e.config(state= "disabled")
 
+def color_bg1(e):
+    e.config(disabledbackground="red")
+
+def color_bg2(e):
+    e.config(disabledbackground="green")
+
 
 def createGameTable():
     for i in range(NumberOfGames):
@@ -38,8 +44,11 @@ def createGameTable():
                e = Entry(test, width=15, fg='blue', font=('Arial', 12, 'bold'))
             e.grid(row=i,column=j)
             e.insert(END,listData[i][j])
-
-
+            disable_entry(e)
+            if( j>0 and j<=3):
+                color_bg1(e)
+            else:
+                color_bg2(e)
 
             # e.insert(END,listData[])
 
@@ -50,23 +59,23 @@ def canvas_Click_event(self):
 
 var = StringVar()
 gameNum = 1
-gameLabel = Label(root, text="\nNumber of games " + str(NumberOfGames))
+# gameLabel = Label(root, text="\nNumber of games " + str(NumberOfGames))
 
 # numberToGuess1=Label(root,text=str(SecretNumber))
 # numberToGuess2=Label(root,text=str(SecretNumber))
 
-guessNumberLabel = Label(root, text="guessNum: "+ str(SecretNumber))
-currentGuessLabel = Label(root, text="guess: ")
-nbLabel = Label(root, text="nb: ")
-nhLabel = Label(root, text="nh: ")
-spaceLabel = Label(root, text="                     ")
-
-
-
-guessNumberLabel2 = Label(root, text="guessNum: " + str(SecretNumber))
-currentGuessLabel2 = Label(root, text="guess:")
-nbLabel2 = Label(root, text="nb:")
-nhLabel2 = Label(root, text="nh:")
+# guessNumberLabel = Label(root, text="guessNum: "+ str(SecretNumber))
+# currentGuessLabel = Label(root, text="guess: ")
+# nbLabel = Label(root, text="nb: ")
+# nhLabel = Label(root, text="nh: ")
+# spaceLabel = Label(root, text="                     ")
+#
+#
+#
+# guessNumberLabel2 = Label(root, text="guessNum: " + str(SecretNumber))
+# currentGuessLabel2 = Label(root, text="guess:")
+# nbLabel2 = Label(root, text="nb:")
+# nhLabel2 = Label(root, text="nh:")
 
 
 def democolorChange():b1.configure(bg="red",fg="yellow")
@@ -87,23 +96,23 @@ NumberOfGames=NumberOfGames+1
 # numberToGuess1.grid(row=0, column=0, sticky="", pady=2, columnspan=1)
 # numberToGuess2.grid(row=0, column=6, sticky="", pady=2,columnspan=1)
 
-guessNumberLabel.grid(row=1, column=0, sticky=W, pady=2)
-currentGuessLabel.grid(row=1, column=1, sticky=W, pady=2)
-nbLabel.grid(row=1, column=3, sticky=W, pady=2)
-nhLabel.grid(row=1, column=4, sticky=W, pady=2)
-b1.grid(row=10, column=5, sticky=W, pady=2)
-# b2.grid(row=2,column=2,sticky=W,pady=2)
-
-spaceLabel.grid(row=1, column=5, sticky=W, pady=2)
-
-guessNumberLabel2.grid(row=1, column=6, sticky=E, pady=2)
-currentGuessLabel2.grid(row=1, column=7, sticky=E, pady=2)
-nbLabel2.grid(row=1, column=8, sticky=E, pady=2)
-nhLabel2.grid(row=1, column=9, sticky=E, pady=2)
-
-
-separator = Separator(root, orient='horizontal')
-separator.place(relx=0, rely=1.0, relwidth=1, relheight=1)
+# guessNumberLabel.grid(row=1, column=0, sticky=W, pady=2)
+# currentGuessLabel.grid(row=1, column=1, sticky=W, pady=2)
+# nbLabel.grid(row=1, column=3, sticky=W, pady=2)
+# nhLabel.grid(row=1, column=4, sticky=W, pady=2)
+# b1.grid(row=10, column=5, sticky=W, pady=2)
+# # b2.grid(row=2,column=2,sticky=W,pady=2)
+#
+# spaceLabel.grid(row=1, column=5, sticky=W, pady=2)
+#
+# guessNumberLabel2.grid(row=1, column=6, sticky=E, pady=2)
+# currentGuessLabel2.grid(row=1, column=7, sticky=E, pady=2)
+# nbLabel2.grid(row=1, column=8, sticky=E, pady=2)
+# nhLabel2.grid(row=1, column=9, sticky=E, pady=2)
+#
+#
+# separator = Separator(root, orient='horizontal')
+# separator.place(relx=0, rely=1.0, relwidth=1, relheight=1)
 
 root.mainloop()
 
