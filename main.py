@@ -46,6 +46,7 @@ def createGameTable():
             e.insert(END,listData[i][j])
             if(i>0):
                 disable_entry(e)
+                ##
             # if( j>0 and j<=3):
             #     color_bg1(e)
             # else:
