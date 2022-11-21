@@ -2,71 +2,14 @@ from enum import Enum
 import tkinter as tk
 from tkinter import *
 from tkinter.ttk import Separator
-from tkinter import ttk
-from tkinter import messagebox
 
 from bh import *
 
 
 root = tk.Tk()
-gamesNum=1
-digsNum = 4
+# root.attributes('-topmost', True)
+# root.geometry("500x500")
 
-
-def start_window():
-    root.attributes('-topmost', True)
-    root.geometry("250x250")
-    root.resizable(False, False)
-    root.title('Bulls and pigs')
-    starting_screen()
-
-
-
-
-def spinbox_digits():
-    int_var = IntVar()
-    digsL  = Label(root,text="before ").pack()
-    spin_box = ttk.Spinbox(
-        root,
-        textvariable=int_var,
-        from_=0,
-        to=8,
-        width=4,
-        wrap=True)
-    spin_box.set(4)
-    digitsNum = spin_box.get()
-
-    spin_box.pack()
-
-
-def spinbox_gamesNum():
-    int_var = IntVar()
-    spin_box = ttk.Spinbox(
-        root,
-        textvariable=int_var,
-        from_=0,
-        to=100,
-        width=4,
-        wrap=True)
-    spin_box.set(10)
-    spin_box.pack()
-
-def startgame():
-    messagebox.showinfo("Hello Python", "Hello World" )
-
-
-def starting_screen():
-    Label(root, text="To start the game you have to choose:").pack()
-    Label(root, text="How much digits would be in the number?").pack()
-    spinbox_digits()
-    Label(root, text="How much games would you like to play?").pack()
-    spinbox_gamesNum()
-    #sendBut = Button(root, "Start playing!")
-
-    B = Button(root, text="Start playing!", command=startgame)
-    B.pack()
-
-start_window()
 
 COLORS=['blue','green','red','purple','yellow']
 listData=[('Guess','NumberGuessed ','Bh ','Nh ','NumberGuessed ','Bh ','Nh'),
@@ -103,6 +46,7 @@ def createGameTable():
             e.insert(END,listData[i][j])
             if(i>0):
                 disable_entry(e)
+                ##
             # if( j>0 and j<=3):
             #     color_bg1(e)
             # else:
@@ -114,7 +58,7 @@ def canvas_Click_event(self):
     # self.x, self.y = event.x, event.y
     print("you pressed : ")
 
-
+##
 var = StringVar()
 gameNum = 1
 # gameLabel = Label(root, text="\nNumber of games " + str(NumberOfGames))

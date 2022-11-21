@@ -1,6 +1,7 @@
 # author: itzhik aviv
 import random
 import sys
+from main import *
 import tkinter as tk
 from tkinter import *
 
@@ -113,6 +114,13 @@ class BH:
                   " is: ", self.__guess, \
                   " table size: ", len(self.__L), \
                   " nb: ", self.__NB, " nh: ", self.__NH)
+
+            # listData[self.__counter][1]=self.__guess
+            # listData[self.__counter][2]=self.__guess
+            # listData[self.__counter][3]=self.__guess
+            # createGameTable()
+            # updateGame(listData,self.__counter,self.__guess,self.__NB,self.__NH)
+
             if self.__NB == self.__numberOfDigits:
                 break
             else:
@@ -132,7 +140,7 @@ def main():
     l = []
     for i in range(NumberOfGames):
        print("\ngame number ", str(i+1)) ##send parameter to fucntion which set the label of game number played
-       bh = BH(number=Number, numberOfDigits=NumberOfDigits)
+       bh = BH(number=Number, numberOfDigits=NumberOfDigits,numberOfGuess=i+1)
        l.append(bh.getCounter())
     print("average number of guesses for ", \
           str(NumberOfGames), " games is: ", \
