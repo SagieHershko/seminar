@@ -24,6 +24,7 @@ listData=[('Guess','NumberGuessed ','Bh ','Nh ','NumberGuessed ','Bh ','Nh'),
           (9,"","","","","",""),
           (10,"","","","","","")]
 
+##
 def disable_entry(e):
    e.config(state= "disabled")
 
