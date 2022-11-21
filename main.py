@@ -33,7 +33,7 @@ def color_bg1(e):
 
 def color_bg2(e):
     e.config(disabledbackground="green")
-
+#
 
 def createGameTable():
     for i in range(NumberOfGames):
