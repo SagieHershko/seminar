@@ -24,6 +24,10 @@ listData=[('Guess','NumberGuessed ','Bh ','Nh ','Guess','NumberGuessed ','Bh ','
           (9,"","","","","","",""),
           (10,"","","","","","","")]
 
+def disable_entry(e):
+   e.config(state= "disabled")
+
+
 def createGameTable():
     for i in range(NumberOfGames):
         for j in range(8):
@@ -31,6 +35,7 @@ def createGameTable():
             e = Entry(test, width=15, fg='blue', font=('Arial', 12, 'bold'))
             e.grid(row=i,column=j)
             e.insert(END,listData[i][j])
+            disable_entry(e)
 
             # e.insert(END,listData[])
 
