@@ -1,6 +1,7 @@
 # author: itzhik aviv
 import random
 import sys
+import tkinter as tk
 from tkinter import *
 
 NumberOfGames = 10
@@ -8,6 +9,8 @@ NumberOfDigits = 4
 Number = 0
 SecretNumber=0
 Zero = True
+
+test = tk.Tk()
 
 class BH:
 
@@ -23,6 +26,8 @@ class BH:
         else:
             if len(s1) == len(s2):
                self.__L.append(s1)
+
+
       #random.shuffle(self.__L)
 
     """choose randomly number from the table (for start guessing"""
