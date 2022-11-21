@@ -56,7 +56,7 @@ def canvas_Click_event(self):
     # self.x, self.y = event.x, event.y
     print("you pressed : ")
 
-
+##
 var = StringVar()
 gameNum = 1
 # gameLabel = Label(root, text="\nNumber of games " + str(NumberOfGames))
