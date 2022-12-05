@@ -1,18 +1,20 @@
-from enum import Enum
 import tkinter as tk
 from tkinter import *
-from tkinter.ttk import Separator
 from tkinter import ttk
-from tkinter import messagebox
 
-from bh import *
+from bh import startgamebh
 
 test = tk.Tk()
 
 
 root = tk.Tk()
-gamesNum=1
-digsNum = 4
+gamesNum=0
+digsNum = 0
+selected_digits = IntVar()
+int_var = IntVar()
+
+spinboxdig = tk.Spinbox(root, from_=4, to=8, textvariable=selected_digits, width=4, wrap=True)
+spinboxgames = ttk.Spinbox(root, textvariable=int_var, from_=0, to=100, width=4, wrap=True)
 
 
 def start_window():
@@ -26,45 +28,33 @@ def start_window():
 
 
 def spinbox_digits():
-    int_var = IntVar()
-    digsL  = Label(root,text="before ").pack()
-    spin_box = ttk.Spinbox(
-        root,
-        textvariable=int_var,
-        from_=0,
-        to=8,
-        width=4,
-        wrap=True)
-    spin_box.set(4)
-    digitsNum = spin_box.get()
+    spinboxdig.pack()
 
-    spin_box.pack()
 
 
 def spinbox_gamesNum():
-    int_var = IntVar()
-    spin_box = ttk.Spinbox(
-        root,
-        textvariable=int_var,
-        from_=0,
-        to=100,
-        width=4,
-        wrap=True)
-    spin_box.set(10)
-    spin_box.pack()
+    spinboxgames.set(10)
+    spinboxgames.pack()
+
 
 def startgame():
-    messagebox.showinfo("Hello Python", "Hello World" )
+    global gamesNum
+    global digsNum
+    gamesNum = int(spinboxgames.get())
+    #gamesNum = spinboxgames.get()
+    digsNum = int(spinboxdig.get())
+    tk.Label(root, text="You selected " + str(digsNum) + " digits, and " + str(gamesNum) + " games. ").pack()
+    startgamebh(digsNum, gamesNum)
+
 
 
 def starting_screen():
     Label(root, text="To start the game you have to choose:").pack()
     Label(root, text="How much digits would be in the number?").pack()
-    spinbox_digits()
+    temp_dig = spinbox_digits()
     Label(root, text="How much games would you like to play?").pack()
     spinbox_gamesNum()
     #sendBut = Button(root, "Start playing!")
-
     B = Button(root, text="Start playing!", command=startgame)
     B.pack()
 
@@ -118,7 +108,6 @@ def canvas_Click_event(self):
 
 
 var = StringVar()
-gameNum = 1
 # gameLabel = Label(root, text="\nNumber of games " + str(NumberOfGames))
 
 # numberToGuess1=Label(root,text=str(SecretNumber))

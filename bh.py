@@ -1,17 +1,16 @@
 # author: itzhik aviv
 import random
 import sys
-from main import *
+#from main import *
 import tkinter as tk
 from tkinter import *
 
 NumberOfGames = 10
 NumberOfDigits = 4
 Number = 0
-SecretNumber=0
+SecretNumber = 0
 Zero = True
 
-test = tk.Tk()
 
 class BH:
 
@@ -140,7 +139,7 @@ def main():
     l = []
     for i in range(NumberOfGames):
        print("\ngame number ", str(i+1)) ##send parameter to fucntion which set the label of game number played
-       bh = BH(number=Number, numberOfDigits=NumberOfDigits,numberOfGuess=i+1)
+       bh = BH(number=Number, numberOfDigits=NumberOfDigits)
        l.append(bh.getCounter())
     print("average number of guesses for ", \
           str(NumberOfGames), " games is: ", \
@@ -148,7 +147,17 @@ def main():
     sys.stdout.close()
 
 
-main()
+
+
+def startgamebh(userdigs, usergames):
+    global Number
+    global NumberOfDigits
+    Number = usergames
+    NumberOfDigits = userdigs
+    main()
+
+
+#main()
 
 
 
