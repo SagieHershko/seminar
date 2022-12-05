@@ -24,13 +24,8 @@ def start_window():
     root.title('Bulls and pigs')
     starting_screen()
 
-
-
-
 def spinbox_digits():
     spinboxdig.pack()
-
-
 
 def spinbox_gamesNum():
     spinboxgames.set(10)
@@ -41,24 +36,25 @@ def startgame():
     global gamesNum
     global digsNum
     gamesNum = int(spinboxgames.get())
-    #gamesNum = spinboxgames.get()
     digsNum = int(spinboxdig.get())
     tk.Label(root, text="You selected " + str(digsNum) + " digits, and " + str(gamesNum) + " games. ").pack()
     startgamebh(digsNum, gamesNum)
 
-
-
 def starting_screen():
     Label(root, text="To start the game you have to choose:").pack()
     Label(root, text="How much digits would be in the number?").pack()
-    temp_dig = spinbox_digits()
+    spinbox_digits()
     Label(root, text="How much games would you like to play?").pack()
     spinbox_gamesNum()
-    #sendBut = Button(root, "Start playing!")
-    B = Button(root, text="Start playing!", command=startgame)
-    B.pack()
+    Button(root, text="Start playing!", command=startgame).pack()
+
 
 start_window()
+
+
+
+
+
 
 COLORS=['blue','green','red','purple','yellow']
 listData=[('Guess','NumberGuessed ','Bh ','Nh ','NumberGuessed ','Bh ','Nh'),

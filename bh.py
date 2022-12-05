@@ -23,8 +23,6 @@ class BH:
         else:
             if len(s1) == len(s2):
                self.__L.append(s1)
-
-
       #random.shuffle(self.__L)
 
     """choose randomly number from the table (for start guessing"""
@@ -75,7 +73,7 @@ class BH:
               + ": must be int (not string or float) and >= 0.")
           if not isinstance(numberOfDigits, int) \
                   or numberOfDigits <=0 or numberOfDigits >= 9:
-            raise ValueError("numberOfDigits = " \
+            raise ValueError("mumberOfDigits = " \
               + str(numberOfDigits)
               + ": must be int (not string or float) and > 0" \
               + " and <= 9."               )
@@ -84,7 +82,7 @@ class BH:
             self.__createTable()
             self.__createTheNumber()
           else:
-            self.__Number__createTheNumber = str(number)
+            self.__Number = str(number)
             self.__number = self.__Number
             self.__numberOfDigits = len(self.__number)
             if not Zero and "0" in self.__Number:
@@ -102,7 +100,6 @@ class BH:
               " table size: ", len(self.__L))
         while True:
             self.__number = self.__Number
-            SecretNumber=self.__number
             self.__counter += 1
             self.__createGuess()
             self.__findBH()
@@ -110,13 +107,6 @@ class BH:
                   " is: ", self.__guess, \
                   " table size: ", len(self.__L), \
                   " nb: ", self.__NB, " nh: ", self.__NH)
-
-            # listData[self.__counter][1]=self.__guess
-            # listData[self.__counter][2]=self.__guess
-            # listData[self.__counter][3]=self.__guess
-            # createGameTable()
-            # updateGame(listData,self.__counter,self.__guess,self.__NB,self.__NH)
-
             if self.__NB == self.__numberOfDigits:
                 break
             else:
@@ -135,7 +125,7 @@ def main():
     sys.stdout = open("bhOutput.txt", 'w')
     l = []
     for i in range(NumberOfGames):
-       print("\ngame number ", str(i+1)) ##send parameter to fucntion which set the label of game number played
+       print("\ngame number ", str(i+1))
        bh = BH(number=Number, numberOfDigits=NumberOfDigits)
        l.append(bh.getCounter())
     print("average number of guesses for ", \
@@ -145,11 +135,10 @@ def main():
 
 
 
-
 def startgamebh(userdigs, usergames):
-    global Number
+    global NumberOfGames
     global NumberOfDigits
-    Number = usergames
+    NumberOfGames = int(usergames)
     NumberOfDigits = userdigs
     main()
 
