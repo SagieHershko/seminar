@@ -1,9 +1,6 @@
 # author: itzhik aviv
 import random
 import sys
-#from main import *
-import tkinter as tk
-from tkinter import *
 
 NumberOfGames = 10
 NumberOfDigits = 4
@@ -78,7 +75,7 @@ class BH:
               + ": must be int (not string or float) and >= 0.")
           if not isinstance(numberOfDigits, int) \
                   or numberOfDigits <=0 or numberOfDigits >= 9:
-            raise ValueError("mumberOfDigits = " \
+            raise ValueError("numberOfDigits = " \
               + str(numberOfDigits)
               + ": must be int (not string or float) and > 0" \
               + " and <= 9."               )
