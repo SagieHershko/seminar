@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
+import time
 
 from bh import startgamebh
 from bh import main
@@ -114,6 +115,20 @@ def win_funcs(tk_window, tk_window2):
     tk_window2.attributes('-topmost', True)
     tk_window2.resizable(False, False)
 
+
+def clean_Treeview(treeview):
+    """
+      Removes all lines from a Treeview widget.
+
+      Parameters:
+      treeview: The Treeview widget to be cleaned.
+
+      Returns:
+      None
+    """
+    treeview.delete(*treeview.get_children())
+
+
 def createGameTable():
     """
     Create and display two Tkinter windows with Treeview widgets, each containing a table with columns and headings.
@@ -163,6 +178,9 @@ def createGameTable():
 
     p2_game.pack()
     p1_game.pack()
+
+    # Schedule the clean_Treeview() function to be called after a 10-second delay
+    root.after(10000, clean_Treeview, p1_game)
 
 
 
