@@ -2,12 +2,8 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-import time
 
 from bh import startgamebh
-from bh import main
-
-
 
 root = tk.Tk()
 gamesNum=0
