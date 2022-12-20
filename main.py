@@ -190,11 +190,6 @@ def fill_table_templet(my_game):
                    values=( 'Ninja', '101', 'Oklahoma'))
 
 
-def read_and_fill(my_game):
-    with open('bhOutput.txt', 'r') as f:
-        lines = f.readlines()
-    for line in lines:
-        print (line)
 
 root.mainloop()
 
