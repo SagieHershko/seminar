@@ -8,7 +8,6 @@ Number = 0
 SecretNumber = 0
 Zero = True
 
-
 class BH:
 
     """create the first table of options"""
@@ -128,9 +127,15 @@ def main():
        print("\ngame number ", str(i+1))
        bh = BH(number=Number, numberOfDigits=NumberOfDigits)
        l.append(bh.getCounter())
-    print("average number of guesses for ", \
+ #   print("average number of guesses for ", \
+ #         str(NumberOfGames), " games is: ", \
+ #         sum(l)/len(l))
+
+    avarageStr = "average number of guesses for ", \
           str(NumberOfGames), " games is: ", \
-          sum(l)/len(l))
+          sum(l)/len(l)
+
+    print(avarageStr)
     sys.stdout.close()
 
 

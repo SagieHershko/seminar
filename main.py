@@ -1,10 +1,11 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 
 from bh import startgamebh
+from bh import main
 
-test = tk.Tk()
 
 
 root = tk.Tk()
@@ -12,12 +13,22 @@ gamesNum=0
 digsNum = 0
 selected_digits = IntVar()
 int_var = IntVar()
+COLORS=['blue','green','red','purple','yellow']
 
 spinboxdig = tk.Spinbox(root, from_=4, to=8, textvariable=selected_digits, width=4, wrap=True)
 spinboxgames = ttk.Spinbox(root, textvariable=int_var, from_=0, to=100, width=4, wrap=True)
 
 
 def start_window():
+    """
+    Create and display a Tkinter window with a title, fixed size, and non-resizable attributes.
+
+    Parameters:
+    None
+
+    Returns:
+    None
+    """
     root.attributes('-topmost', True)
     root.geometry("250x250")
     root.resizable(False, False)
@@ -33,14 +44,38 @@ def spinbox_gamesNum():
 
 
 def startgame():
+    """
+    Initialize the game with the selected number of digits and games, and display a message showing the selected values.
+    If the digsNum is bigger than 4, the process can take some seconds to proceed - so show this window.
+
+    Parameters:
+    None
+
+    Returns:
+    None
+    """
     global gamesNum
     global digsNum
     gamesNum = int(spinboxgames.get())
     digsNum = int(spinboxdig.get())
+    if digsNum>4:
+        messagebox.showwarning("Please be patient!", "Please be patient! This process can take some seconds to proceed.")
     tk.Label(root, text="You selected " + str(digsNum) + " digits, and " + str(gamesNum) + " games. ").pack()
     startgamebh(digsNum, gamesNum)
+    createGameTable()
+
+
 
 def starting_screen():
+    """
+    Display a screen with spinboxes and a button for selecting the number of digits and games in a game.
+
+    Parameters:
+    None
+
+    Returns:
+    None
+    """
     Label(root, text="To start the game you have to choose:").pack()
     Label(root, text="How much digits would be in the number?").pack()
     spinbox_digits()
@@ -56,7 +91,116 @@ start_window()
 
 
 
-COLORS=['blue','green','red','purple','yellow']
+
+
+
+
+def win_funcs(tk_window, tk_window2):
+    """
+    Modify the appearance and behavior of Tkinter windows.
+
+    Parameters:
+    tk_window (Tk): The first Tkinter window to be modified.
+    tk_window2 (Tk): The second Tkinter window to be modified.
+
+    Returns:
+    None
+    """
+    tk_window.attributes('-topmost', True)
+    tk_window.resizable(False, False)
+    tk_window.title('Player one window')
+
+    tk_window2.title('Player two window')
+    tk_window2.attributes('-topmost', True)
+    tk_window2.resizable(False, False)
+
+def createGameTable():
+    """
+    Create and display two Tkinter windows with Treeview widgets, each containing a table with columns and headings.
+
+    Parameters:
+    None
+
+    Returns:
+    None
+    """
+    p1_gameTK = tk.Tk()
+    p2_gameTK = tk.Tk()
+    win_funcs(p1_gameTK,p2_gameTK)
+
+    p1_game = ttk.Treeview(p1_gameTK)
+    p2_game = ttk.Treeview(p2_gameTK)
+
+    p1_game['columns'] = ('Guess', 'NumberGuessed_P1', 'Bh_P1', 'Nh_P1')
+    p2_game['columns'] = ('Guess', 'NumberGuessed_P2', 'Bh_P2', 'Nh_P2')
+
+    p1_game.column("#0", width=0,  stretch=NO)
+    p1_game.column("Guess",anchor=CENTER, width=100)
+    p1_game.column("NumberGuessed_P1",anchor=CENTER,width=130)
+    p1_game.column("Bh_P1",anchor=CENTER,width=100)
+    p1_game.column("Nh_P1",anchor=CENTER,width=100)
+
+    p2_game.column("#0", width=0,  stretch=NO)
+    p2_game.column("Guess",anchor=CENTER, width=100)
+    p2_game.column("NumberGuessed_P2",anchor=CENTER,width=130)
+    p2_game.column("Bh_P2",anchor=CENTER,width=100)
+    p2_game.column("Nh_P2",anchor=CENTER,width=100)
+
+    p1_game.heading("#0", text="", anchor=CENTER)
+    p1_game.heading("Guess", text="Guess Num #", anchor=CENTER)
+    p1_game.heading("NumberGuessed_P1", text="NumberGuessed_P1", anchor=CENTER)
+    p1_game.heading("Bh_P1", text="Bh_P1", anchor=CENTER)
+    p1_game.heading("Nh_P1", text="Nh_P1", anchor=CENTER)
+
+    p2_game.heading("#0", text="", anchor=CENTER)
+    p2_game.heading("Guess", text="Guess Num #", anchor=CENTER)
+    p2_game.heading("NumberGuessed_P2", text="NumberGuessed_P2", anchor=CENTER)
+    p2_game.heading("Bh_P2", text="Bh_P2", anchor=CENTER)
+    p2_game.heading("Nh_P2", text="Nh_P2", anchor=CENTER)
+
+    fill_table_templet(p1_game)
+    fill_table_templet(p2_game)
+
+    p2_game.pack()
+    p1_game.pack()
+
+
+
+
+def fill_table_templet(my_game):
+    my_game.insert(parent='', index='end', iid=0, text='',
+                   values=('1', 'Ninja', '101', 'Oklahoma', 'Ni', '10', 'Ok'), tags='p1')
+    my_game.insert(parent='', index='end', iid=1, text='',
+                   values=('2', 'Ninja', '101', 'Oklahoma'))
+    my_game.insert(parent='', index='end', iid=2, text='',
+                   values=( 'Ninja', '101', 'Oklahoma'))
+
+
+def read_and_fill(my_game):
+    with open('bhOutput.txt', 'r') as f:
+        lines = f.readlines()
+    for line in lines:
+        print (line)
+
+root.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""
 listData=[('Guess','NumberGuessed ','Bh ','Nh ','NumberGuessed ','Bh ','Nh'),
           (1,"","","","","",""),
           (2,"","","","","",""),
@@ -70,6 +214,8 @@ listData=[('Guess','NumberGuessed ','Bh ','Nh ','NumberGuessed ','Bh ','Nh'),
           (10,"","","","","","")]
 
 ##
+
+
 def disable_entry(e):
    e.config(state= "disabled")
 
@@ -79,6 +225,7 @@ def color_bg1(e):
 def color_bg2(e):
     e.config(disabledbackground="green")
 #
+
 
 def createGameTable():
     for i in range(7):
@@ -98,12 +245,14 @@ def createGameTable():
 
             # e.insert(END,listData[])
 
-def canvas_Click_event(self):
-    # self.x, self.y = event.x, event.y
-    print("you pressed : ")
+"""
 
 
-var = StringVar()
+
+
+
+
+#var = StringVar()
 # gameLabel = Label(root, text="\nNumber of games " + str(NumberOfGames))
 
 # numberToGuess1=Label(root,text=str(SecretNumber))
@@ -123,9 +272,9 @@ var = StringVar()
 # nhLabel2 = Label(root, text="nh:")
 
 
-def democolorChange():b1.configure(bg="red",fg="yellow")
+#def democolorChange():b1.configure(bg="red",fg="yellow")
 
-labels = []
+#labels = []
 ##def create_label(NumberOfGames):
     ##NumberOfGames=NumberOfGames+1
     # count = len(root.winfo_children())
@@ -134,7 +283,24 @@ labels = []
     ##labels.append(label)##
 
 
-b1=Button(root,text='button1',command=createGameTable())
+#b1=Button(root,text='button1',command=createGameTable())
+
+
+
+
+
+
+
+
+#b1=Button(root,text='button1',command=createGameTable())
+
+
+
+
+
+
+
+
 # b2=Button(root,text='Press for new label',command=create_label(NumberOfGames))
 #NumberOfGames=NumberOfGames+1
 
@@ -158,8 +324,6 @@ b1=Button(root,text='button1',command=createGameTable())
 #
 # separator = Separator(root, orient='horizontal')
 # separator.place(relx=0, rely=1.0, relwidth=1, relheight=1)
-
-root.mainloop()
 
 # -------------------------------------------------------------
 
