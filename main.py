@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 
+import bh
 from bh import startgamebh
 
 root = tk.Tk()
@@ -84,14 +85,6 @@ def starting_screen():
 start_window()
 
 
-
-
-
-
-
-
-
-
 def win_funcs(tk_window, tk_window2):
     """
     Modify the appearance and behavior of Tkinter windows.
@@ -106,10 +99,20 @@ def win_funcs(tk_window, tk_window2):
     tk_window.attributes('-topmost', True)
     tk_window.resizable(False, False)
     tk_window.title('Player one window')
+    style = ttk.Style(tk_window)
+    # set ttk theme to "clam" which support the fieldbackground option
+    style.theme_use("clam")
+    style.configure("Treeview", background="black",
+                    fieldbackground="black", foreground="white")
 
     tk_window2.title('Player two window')
     tk_window2.attributes('-topmost', True)
     tk_window2.resizable(False, False)
+    style = ttk.Style(tk_window2)
+    # set ttk theme to "clam" which support the fieldbackground option
+    style.theme_use("clam")
+    style.configure("Treeview", background="blue",
+                    fieldbackground="blue", foreground="white")
 
 
 def clean_Treeview(treeview):
@@ -145,25 +148,25 @@ def createGameTable():
     p1_game['columns'] = ('Guess', 'NumberGuessed_P1', 'Bh_P1', 'Nh_P1')
     p2_game['columns'] = ('Guess', 'NumberGuessed_P2', 'Bh_P2', 'Nh_P2')
 
-    p1_game.column("#0", width=0,  stretch=NO)
-    p1_game.column("Guess",anchor=CENTER, width=100)
-    p1_game.column("NumberGuessed_P1",anchor=CENTER,width=130)
-    p1_game.column("Bh_P1",anchor=CENTER,width=100)
-    p1_game.column("Nh_P1",anchor=CENTER,width=100)
+    p1_game.column("#0", width=100,  stretch=NO)
+    p1_game.column("Guess",anchor=CENTER, width=130, minwidth=30)
+    p1_game.column("NumberGuessed_P1",anchor=CENTER,width=130, minwidth=50)
+    p1_game.column("Bh_P1",anchor=CENTER,width=50, minwidth=30)
+    p1_game.column("Nh_P1",anchor=CENTER,width=50, minwidth=30)
 
-    p2_game.column("#0", width=0,  stretch=NO)
-    p2_game.column("Guess",anchor=CENTER, width=100)
-    p2_game.column("NumberGuessed_P2",anchor=CENTER,width=130)
-    p2_game.column("Bh_P2",anchor=CENTER,width=100)
-    p2_game.column("Nh_P2",anchor=CENTER,width=100)
+    p2_game.column("#0", width=100,  stretch=NO)
+    p2_game.column("Guess",anchor=CENTER, width=130, minwidth=30)
+    p2_game.column("NumberGuessed_P2",anchor=CENTER,width=130, minwidth=50)
+    p2_game.column("Bh_P2",anchor=CENTER,width=50, minwidth=30)
+    p2_game.column("Nh_P2",anchor=CENTER,width=50, minwidth=30)
 
-    p1_game.heading("#0", text="", anchor=CENTER)
+    p1_game.heading("#0", text="Game Number", anchor=CENTER)
     p1_game.heading("Guess", text="Guess Num #", anchor=CENTER)
     p1_game.heading("NumberGuessed_P1", text="NumberGuessed_P1", anchor=CENTER)
     p1_game.heading("Bh_P1", text="Bh_P1", anchor=CENTER)
     p1_game.heading("Nh_P1", text="Nh_P1", anchor=CENTER)
 
-    p2_game.heading("#0", text="", anchor=CENTER)
+    p2_game.heading("#0", text="Game Number", anchor=CENTER)
     p2_game.heading("Guess", text="Guess Num #", anchor=CENTER)
     p2_game.heading("NumberGuessed_P2", text="NumberGuessed_P2", anchor=CENTER)
     p2_game.heading("Bh_P2", text="Bh_P2", anchor=CENTER)
@@ -176,18 +179,34 @@ def createGameTable():
     p1_game.pack()
 
     # Schedule the clean_Treeview() function to be called after a 10-second delay
-    root.after(10000, clean_Treeview, p1_game)
+    #root.after(10000, clean_Treeview, p1_game)
 
-
-
+#
+# def sendResult(T):
+#     fill_table_templet(my_game)
 
 def fill_table_templet(my_game):
-    my_game.insert(parent='', index='end', iid=0, text='',
-                   values=('1', 'Ninja', '101', 'Oklahoma', 'Ni', '10', 'Ok'), tags='p1')
-    my_game.insert(parent='', index='end', iid=1, text='',
-                   values=('2', 'Ninja', '101', 'Oklahoma'))
-    my_game.insert(parent='', index='end', iid=2, text='',
-                   values=( 'Ninja', '101', 'Oklahoma'))
+    temp_iid=0
+    temp_per=0
+    #while bh.gameRounds_t:
+    for game_index in bh.gameRounds_t: #all of them have the same parent
+        for row_index in game_index:
+            if row_index[0]==1:
+                #my_game.insert(parent='', index='end', iid=temp_iid, text='1',
+                #               values=row_index)
+                my_game.insert(parent='', index='end', text=bh.gameRounds_t.index(game_index)+1,
+                                   values=row_index)
+                temp_per=temp_iid
+            else:
+                #my_game.insert(parent='', index='end', iid=temp_iid, text='1',
+                #               values=row_index)
+                my_game.insert(parent='', index='end', text='',
+                                values=row_index)
+                #my_game.move(str(temp_iid), str(temp_per), str(temp_per))
+            #temp_iid+=1
+
+
+
 
 
 

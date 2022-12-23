@@ -7,6 +7,7 @@ NumberOfDigits = 4
 Number = 0
 SecretNumber = 0
 Zero = True
+gameRounds_t = []
 
 class BH:
 
@@ -59,10 +60,10 @@ class BH:
         #random.shuffle(self.__L)
 
 
-
     """ the main func of the game"""
 
     def __init__(self, number = 0, numberOfDigits = 4):
+        this_game_tup = []
         self.__counter = 0
         try:
           if not isinstance(number, int) \
@@ -106,7 +107,13 @@ class BH:
                   " is: ", self.__guess, \
                   " table size: ", len(self.__L), \
                   " nb: ", self.__NB, " nh: ", self.__NH)
+            global gameRounds_t
+            t = (self.__counter, self.__guess , self.__NB, self.__NH)
+            # main.sendResult(t)
+            this_game_tup.append(t)
             if self.__NB == self.__numberOfDigits:
+                gameRounds_t.append(this_game_tup)
+                #gameRounds_t.append(("0"))
                 break
             else:
                 #self.__L.remove(self.__guess)
