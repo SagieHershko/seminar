@@ -150,7 +150,7 @@ def main():
 def startgamebh(userdigs, usergames):
     global NumberOfGames
     global NumberOfDigits
-    NumberOfGames = int(usergames)
+    NumberOfGames = int(usergames)*2
     NumberOfDigits = userdigs
     global gameRounds_t
     gameRounds_t.clear()

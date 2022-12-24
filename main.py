@@ -1,3 +1,4 @@
+import time
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
@@ -60,6 +61,7 @@ def startgame():
         messagebox.showwarning("Please be patient!", "Please be patient! This process can take some seconds to proceed.")
     tk.Label(root, text="You selected " + str(digsNum) + " digits, and " + str(gamesNum) + " games. ").pack()
     startgamebh(digsNum, gamesNum)
+
     createGameTable()
 
 
@@ -113,7 +115,7 @@ def win_funcs(tk_window, tk_window2):
     # set ttk theme to "clam" which support the fieldbackground option
     style.theme_use("clam")
     style.configure("Treeview", background="blue",
-                    fieldbackground="#76b5c5", foreground="white", borderwidth =2, separatorcolor = 'white')
+                    fieldbackground="#blue", foreground="white", borderwidth =2, separatorcolor = 'white')
 
 
 def clean_Treeview(treeview):
@@ -186,15 +188,40 @@ def createGameTable():
 # def sendResult(T):
 #     fill_table_templet(my_game)
 
+def show_game_num(gamenum):
+    messagebox.showwarning("New game!", "This is game number: " +str(gamesNum) )
+
+
+def fill_this_game_children(my_game, parentgame, row_index):
+    my_game.insert(parentgame, index='end', text='',
+                   values=row_index)  # all of them have the same parent
+    #my_game.after(1000, fill_this_game, my_game, parentgame, row_index)
+
+
+
+
 def fill_table_templet(my_game):
-    for game_index in bh.gameRounds_t: #all of them have the same parent
+    for game_index in bh.gameRounds_t:
         for row_index in game_index:
             if row_index[0]==1:
                 parentgame = my_game.insert(parent='', index='end',text=bh.gameRounds_t.index(game_index)+1,
                                    values=row_index)
             else:
-                my_game.insert(parentgame, index='end', text='',
-                                values=row_index)
+                my_game.after(1000, fill_this_game_children, my_game, parentgame, row_index)
+                #my_game.insert(parentgame, index='end', text='',
+                #                values=row_index) #all of them have the same parent
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
