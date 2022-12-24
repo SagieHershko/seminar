@@ -103,7 +103,8 @@ def win_funcs(tk_window, tk_window2):
     # set ttk theme to "clam" which support the fieldbackground option
     style.theme_use("clam")
     style.configure("Treeview", background="black",
-                    fieldbackground="black", foreground="white")
+                    fieldbackground="76b5c5", foreground="white")
+
 
     tk_window2.title('Player two window')
     tk_window2.attributes('-topmost', True)
@@ -112,7 +113,7 @@ def win_funcs(tk_window, tk_window2):
     # set ttk theme to "clam" which support the fieldbackground option
     style.theme_use("clam")
     style.configure("Treeview", background="blue",
-                    fieldbackground="blue", foreground="white")
+                    fieldbackground="#76b5c5", foreground="white", borderwidth =2, separatorcolor = 'white')
 
 
 def clean_Treeview(treeview):
@@ -186,24 +187,14 @@ def createGameTable():
 #     fill_table_templet(my_game)
 
 def fill_table_templet(my_game):
-    temp_iid=0
-    temp_per=0
-    #while bh.gameRounds_t:
     for game_index in bh.gameRounds_t: #all of them have the same parent
         for row_index in game_index:
             if row_index[0]==1:
-                #my_game.insert(parent='', index='end', iid=temp_iid, text='1',
-                #               values=row_index)
-                my_game.insert(parent='', index='end', text=bh.gameRounds_t.index(game_index)+1,
+                parentgame = my_game.insert(parent='', index='end',text=bh.gameRounds_t.index(game_index)+1,
                                    values=row_index)
-                temp_per=temp_iid
             else:
-                #my_game.insert(parent='', index='end', iid=temp_iid, text='1',
-                #               values=row_index)
-                my_game.insert(parent='', index='end', text='',
+                my_game.insert(parentgame, index='end', text='',
                                 values=row_index)
-                #my_game.move(str(temp_iid), str(temp_per), str(temp_per))
-            #temp_iid+=1
 
 
 

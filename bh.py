@@ -152,6 +152,8 @@ def startgamebh(userdigs, usergames):
     global NumberOfDigits
     NumberOfGames = int(usergames)
     NumberOfDigits = userdigs
+    global gameRounds_t
+    gameRounds_t.clear()
     main()
 
 
