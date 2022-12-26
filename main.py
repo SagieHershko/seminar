@@ -13,11 +13,15 @@ digsNum = 0
 flag=0
 selected_digits = IntVar()
 int_var = IntVar()
+canvas = Canvas(root, width=232, height=80, bg="red")
+c1 = canvas.create_text(116, 20, text="Please be patient! " , fill="black", font=('Helvetica 10 bold'))
+c2 = canvas.create_text(116, 50, text="This process can take some seconds to proceed.", fill="black",font=('Helvetica 7 bold'))
+
 COLORS=['blue','green','red','purple','yellow']
 global parent
 
-spinboxdig = tk.Spinbox(root, from_=4, to=8, textvariable=selected_digits, width=4, wrap=True)
-spinboxgames = ttk.Spinbox(root, textvariable=int_var, from_=0, to=100, width=4, wrap=True)
+spinboxdig = tk.Spinbox(root, from_=4, to=8, textvariable=selected_digits, width=4, wrap=True, state="readonly")
+spinboxgames = ttk.Spinbox(root, textvariable=int_var, from_=1, to=100, width=4, wrap=True, state="readonly")
 
 
 def start_window():
@@ -46,19 +50,24 @@ def spinbox_gamesNum():
 def real_start():
     startgamebh(digsNum, gamesNum)
     createGameTable()
+    root.after(2000*gamesNum, canva_type,2)
+    #canva_type(2)
+
 
 def canva_type(flag):
+
     if flag==0:
-        canvas = Canvas(root, width=232, height=80, bg="red")
-        canvas.create_text(116, 20, text="Please be patient!", fill="black", font=('Helvetica 10 bold'))
-        canvas.create_text(116, 50, text="This process can take some seconds to proceed.", fill="black",
-                           font=('Helvetica 7 bold'))
         canvas.pack()
         flag = 1
     elif flag==1:
         return
     elif flag==2:
-        return
+        canvas.config(bg="green" )
+        str = "Player ____ won! \nAvg guesses: ___ "
+        canvas.itemconfig(c1, text="")
+        canvas.itemconfig(c2, text=str, font=('Helvetica 10 bold'))
+        canvas.pack()
+
 
 
 
@@ -109,9 +118,9 @@ def starting_screen():
     None
     """
     Label(root, text="To start the game you have to choose:").pack()
-    Label(root, text="How much digits would be in the number?").pack()
+    Label(root, text="How many digits would be in the number?").pack()
     spinbox_digits()
-    Label(root, text="How much games would you like to play?").pack()
+    Label(root, text="How many games would you like to play?").pack()
     spinbox_gamesNum()
     Button(root, text="Start playing!", command=startgame).pack()
 
@@ -273,6 +282,7 @@ def insert_row(my_game, parent, values, game_index):
 
 def fill_table_template(my_game,index):
     parent = None
+    global flag
     # def loop(index):
     #     #my_game.after(2000,loop)
     #     index=index
@@ -282,6 +292,9 @@ def fill_table_template(my_game,index):
         #     root.after(2000, test, game_index)
     # def inside_loop(index):
     if index>=len(bh.gameRounds_t):
+        #flag=2
+        #canva_type(flag)
+
         return
     for row_index in bh.gameRounds_t[index]:
             if row_index[0] == 1:
