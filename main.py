@@ -289,7 +289,7 @@ def insert_row(my_game, parent, values, game_index):
 
 def fill_table_template(my_game,index):
     # divideGamerounds(bh.gameRounds_t)
-    if index==0:
+    """if index==0:
         i=0
         j=0
         gameRoundsP1=[]
@@ -301,7 +301,7 @@ def fill_table_template(my_game,index):
         for bh.gameRounds_t in range(divider,len(bh.gameRounds_t)):
             gameRoundsP2[j]=bh.gameRounds_t[j]
             j+=1
-
+"""
     parent = None
     global flag
     # def loop(index):
