@@ -108,7 +108,7 @@ class BH:
                   " table size: ", len(self.__L), \
                   " nb: ", self.__NB, " nh: ", self.__NH)
             global gameRounds_t
-            t = (self.__counter, self.__guess , self.__NB, self.__NH)
+            t = (self.__counter, self.__guess , self.__NB, self.__NH, len(self.__L))
             # main.sendResult(t)
             this_game_tup.append(t)
             if self.__NB == self.__numberOfDigits:
