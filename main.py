@@ -11,7 +11,7 @@ root = tk.Tk()
 gamesNum=0
 digsNum = 0
 avgP1 = 0
-
+indexpar=1
 avgP2 = 0
 guessNum=0
 
@@ -285,12 +285,14 @@ def insert_row(my_game, parent, values, game_index):
 
 
 def insert_row2(my_game, parent, values, game_index):
+    global indexpar
     #root.after(2000,insert_row,my_game, parent, row_index, bh.gameRounds_t.index(game_index)+1)
     if parent:
         my_game.insert(parent, index='end', text='', values=values)
     else:
         #parent = None
         parent = my_game.insert(parent='', index='end', text=game_index, values=values)
+        indexpar=indexpar+1
     return parent
 
 
@@ -311,15 +313,17 @@ def fill_table_template(my_game,index):
 
 def fill_table_template2(my_game,index):
     parent = None
+    global indexpar
+
     if index >= (len(bh.gameRounds_t)):
         return
 
     for row_index in bh.gameRounds_t[index]:
             if row_index[0] == 1:
                 parent = None
-                parent = insert_row2(my_game, parent, row_index, bh.gameRounds_t.index(bh.gameRounds_t[index]) + 1)
+                parent = insert_row2(my_game, parent, row_index, indexpar)
             else:
-                my_game.after(2000, insert_row2,my_game, parent, row_index, bh.gameRounds_t.index(bh.gameRounds_t[index])+1)
+                my_game.after(2000, insert_row2,my_game, parent, row_index, indexpar)
     my_game.after(2000, fill_table_template2,my_game,index+1)
 
 
