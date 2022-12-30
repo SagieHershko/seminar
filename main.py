@@ -1,29 +1,29 @@
-import time
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
-from tkinter import messagebox
 
 import bh
 from bh import startgamebh
 
 root = tk.Tk()
-gamesNum=0
+gamesNum = 0
 digsNum = 0
 avgP1 = 0
-indexpar=1
+guessNum_p1 = 0
+
 avgP2 = 0
-guessNum=0
+guessNum_p2 = 0
+par_index = 1
 
-
-flag=0
+flag = 0
 selected_digits = IntVar()
 int_var = IntVar()
 canvas = Canvas(root, width=232, height=80, bg="red")
-c1 = canvas.create_text(116, 20, text="Please be patient! " , fill="black", font=('Helvetica 10 bold'))
-c2 = canvas.create_text(116, 50, text="This process can take some seconds to proceed.", fill="black",font=('Helvetica 7 bold'))
+redC = canvas.create_text(116, 20, text="Please be patient! ", fill="black", font='Helvetica 10 bold')
+greenC = canvas.create_text(116, 50, text="This process can take some seconds to proceed.", fill="black",
+                            font='Helvetica 7 bold')
 
-COLORS=['blue','green','red','purple','yellow']
+COLORS = ['blue', 'green', 'red', 'purple', 'yellow']
 global parent
 
 spinboxdig = tk.Spinbox(root, from_=4, to=8, textvariable=selected_digits, width=4, wrap=True, state="readonly")
@@ -46,41 +46,39 @@ def start_window():
     root.title('Bulls and pigs')
     starting_screen()
 
+
 def spinbox_digits():
     spinboxdig.pack()
+
 
 def spinbox_gamesNum():
     spinboxgames.set(10)
     spinboxgames.pack()
 
+
 def real_start():
+    global par_index
+    par_index = 1
     startgamebh(digsNum, gamesNum)
     createGameTable()
-    root.after(2000*gamesNum, canva_type,2)
-    #canva_type(2)
+    root.after(2000 * gamesNum, canva_type, 2)
 
 
 def canva_type(flag):
-
-    if flag==0:
+    if flag == 0:
         canvas.pack()
         flag = 1
-    elif flag==1:
+    elif flag == 1:
         return
-    elif flag==2:
-        canvas.config(bg="green" )
-        str = "Player ____ won! \nAvg guesses: ___ "
-        canvas.itemconfig(c1, text="")
-        canvas.itemconfig(c2, text=str, font=('Helvetica 10 bold'))
+    elif flag == 2:
+        canvas.config(bg="green")
+        won_str = "Player ____ won! \nAvg guesses: ___ "
+        canvas.itemconfig(redC, text="")
+        canvas.itemconfig(greenC, text=won_str, font='Helvetica 10 bold')
         canvas.pack()
 
 
-
-
-
-
-
-def startgame():
+def start_game():
     """
     Initialize the game with the selected number of digits and games, and display a message showing the selected values.
     If the digsNum is bigger than 4, the process can take some seconds to proceed - so show this window.
@@ -96,21 +94,11 @@ def startgame():
     global flag
     gamesNum = int(spinboxgames.get())
     digsNum = int(spinboxdig.get())
-    if digsNum>4:
+    if digsNum > 4:
         canva_type(flag)
-#        if flag==0:
-#          canvas = Canvas(root, width=232, height=80, bg="red")
-#          canvas.create_text(116, 20, text="Please be patient!", fill="black", font=('Helvetica 10 bold'))
-#           canvas.create_text(116, 50, text="This process can take some seconds to proceed.", fill="black", font=('Helvetica 7 bold'))
-#           canvas.pack()
-#          flag=1
         root.after(1000, real_start)
     else:
         real_start()
-        #messagebox.showwarning("Please be patient!", "Please be patient! This process can take some seconds to proceed.")
-    #tk.Label(root, text="You selected " + str(digsNum) + " digits, and " + str(gamesNum) + " games. ").pack()
-
-
 
 
 def starting_screen():
@@ -128,7 +116,7 @@ def starting_screen():
     spinbox_digits()
     Label(root, text="How many games would you like to play?").pack()
     spinbox_gamesNum()
-    Button(root, text="Start playing!", command=startgame).pack()
+    Button(root, text="Start playing!", command=start_game).pack()
 
 
 start_window()
@@ -154,7 +142,6 @@ def win_funcs(tk_window, tk_window2):
     style.configure("Treeview", background="black",
                     fieldbackground="76b5c5", foreground="white")
 
-
     tk_window2.title('Player two window')
     tk_window2.attributes('-topmost', True)
     tk_window2.resizable(False, False)
@@ -162,7 +149,7 @@ def win_funcs(tk_window, tk_window2):
     # set ttk theme to "clam" which support the fieldbackground option
     style.theme_use("clam")
     style.configure("Treeview", background="blue",
-                    fieldbackground="#blue", foreground="white", borderwidth =2, separatorcolor = 'white')
+                    fieldbackground="#blue", foreground="white", borderwidth=2, separatorcolor='white')
 
 
 def clean_Treeview(treeview):
@@ -178,8 +165,6 @@ def clean_Treeview(treeview):
     treeview.delete(*treeview.get_children())
 
 
-
-
 def createGameTable():
     """
     Create and display two Tkinter windows with Treeview widgets, each containing a table with columns and headings.
@@ -192,7 +177,7 @@ def createGameTable():
     """
     p1_gameTK = tk.Tk()
     p2_gameTK = tk.Tk()
-    win_funcs(p1_gameTK,p2_gameTK)
+    win_funcs(p1_gameTK, p2_gameTK)
 
     p1_game = ttk.Treeview(p1_gameTK)
     p2_game = ttk.Treeview(p2_gameTK)
@@ -200,21 +185,19 @@ def createGameTable():
     p1_game['columns'] = ('Guess', 'NumberGuessed_P1', 'Bh_P1', 'Nh_P1', 'Table_Size_P1')
     p2_game['columns'] = ('Guess', 'NumberGuessed_P2', 'Bh_P2', 'Nh_P2', 'Table_Size_P2')
 
-    p1_game.column("#0", width=100,  stretch=NO)
-    p1_game.column("Guess",anchor=CENTER, width=130, minwidth=30)
-    p1_game.column("NumberGuessed_P1",anchor=CENTER,width=130, minwidth=50)
-    p1_game.column("Bh_P1",anchor=CENTER,width=50, minwidth=30)
-    p1_game.column("Nh_P1",anchor=CENTER,width=50, minwidth=30)
-    p1_game.column("Table_Size_P1",anchor=CENTER,width=100, minwidth=50)
+    p1_game.column("#0", width=100, stretch=NO)
+    p1_game.column("Guess", anchor=CENTER, width=130, minwidth=30)
+    p1_game.column("NumberGuessed_P1", anchor=CENTER, width=130, minwidth=50)
+    p1_game.column("Bh_P1", anchor=CENTER, width=50, minwidth=30)
+    p1_game.column("Nh_P1", anchor=CENTER, width=50, minwidth=30)
+    p1_game.column("Table_Size_P1", anchor=CENTER, width=100, minwidth=50)
 
-
-    p2_game.column("#0", width=100,  stretch=NO)
-    p2_game.column("Guess",anchor=CENTER, width=130, minwidth=30)
-    p2_game.column("NumberGuessed_P2",anchor=CENTER,width=130, minwidth=50)
-    p2_game.column("Bh_P2",anchor=CENTER,width=50, minwidth=30)
-    p2_game.column("Nh_P2",anchor=CENTER,width=50, minwidth=30)
-    p2_game.column("Table_Size_P2",anchor=CENTER,width=100, minwidth=50)
-
+    p2_game.column("#0", width=100, stretch=NO)
+    p2_game.column("Guess", anchor=CENTER, width=130, minwidth=30)
+    p2_game.column("NumberGuessed_P2", anchor=CENTER, width=130, minwidth=50)
+    p2_game.column("Bh_P2", anchor=CENTER, width=50, minwidth=30)
+    p2_game.column("Nh_P2", anchor=CENTER, width=50, minwidth=30)
+    p2_game.column("Table_Size_P2", anchor=CENTER, width=100, minwidth=50)
 
     p1_game.heading("#0", text="Game Number", anchor=CENTER)
     p1_game.heading("Guess", text="Guess Num #", anchor=CENTER)
@@ -223,8 +206,6 @@ def createGameTable():
     p1_game.heading("Nh_P1", text="Nh_P1", anchor=CENTER)
     p1_game.heading("Table_Size_P1", text="Table_Size_P1", anchor=CENTER)
 
-
-
     p2_game.heading("#0", text="Game Number", anchor=CENTER)
     p2_game.heading("Guess", text="Guess Num #", anchor=CENTER)
     p2_game.heading("NumberGuessed_P2", text="NumberGuessed_P2", anchor=CENTER)
@@ -232,274 +213,60 @@ def createGameTable():
     p2_game.heading("Nh_P2", text="Nh_P2", anchor=CENTER)
     p2_game.heading("Table_Size_P2", text="Table_Size_P2", anchor=CENTER)
 
-    startindex = int(gamesNum)
-    fill_table_template(p1_game,0)
-    fill_table_template2(p2_game,startindex)
+    start_index = int(gamesNum)
+    fill_table_template(p1_game, 0)
+    fill_table_template2(p2_game, start_index)
 
     p2_game.pack()
     p1_game.pack()
 
-    # Schedule the clean_Treeview() function to be called after a 10-second delay
-    #root.after(10000, clean_Treeview, p1_game)
-
-#
-# def sendResult(T):
-#     fill_table_templet(my_game)
-
-#
-# def fill_this_game_children(my_game, parentgame, row_index):
-#     my_game.insert(parentgame, index='end', text='',
-#                    values=row_index)  # all of them have the same parent
-    #my_game.after(1000, fill_this_game, my_game, parentgame, row_index)
-
-# def fill_this_game_parent(my_game, row_index):
-#     parent=my_game.insert(parent='', index='end',iid=row_index, text='',
-#                    values=row_index)
-
-# def fill_table_templet(my_game):
-#     #global parent
-#     for game_index in bh.gameRounds_t:
-#         for row_index in game_index:
-#             if row_index[0]==1:
-#                 parentgame=my_game.after(2000, fill_this_game_parent, my_game, row_index)
-#                 # parentgame = my_game.insert(parent='', index='end',text=bh.gameRounds_t.index(game_index)+1,
-#                 #                    values=row_index)
-#             else:
-#                 # my_game.after(2000, fill_this_game_children, my_game, parentgame, row_index)
-#                 my_game.insert(parentgame, index='end', text='',
-#                                values=row_index)  # all of them have the same parent
-#                 # my_game.insert(parentgame, index='end', text='',
-#                 #                 values=row_index) #all of them have the same parent
-#
-#
-#
 
 def insert_row(my_game, parent, values, game_index):
-    #root.after(2000,insert_row,my_game, parent, row_index, bh.gameRounds_t.index(game_index)+1)
     if parent:
         my_game.insert(parent, index='end', text='', values=values)
     else:
-        #parent = None
         parent = my_game.insert(parent='', index='end', text=game_index, values=values)
     return parent
 
 
 def insert_row2(my_game, parent, values, game_index):
-    global indexpar
-    #root.after(2000,insert_row,my_game, parent, row_index, bh.gameRounds_t.index(game_index)+1)
+    global par_index
     if parent:
         my_game.insert(parent, index='end', text='', values=values)
     else:
-        #parent = None
         parent = my_game.insert(parent='', index='end', text=game_index, values=values)
-        indexpar=indexpar+1
+        par_index = par_index + 1
     return parent
 
 
-def fill_table_template(my_game,index):
+def fill_table_template(my_game, index):
     parent = None
-    if index >= (len(bh.gameRounds_t)/2):
+    if index >= (len(bh.gameRounds_t) / 2):
         return
     for row_index in bh.gameRounds_t[index]:
-            if row_index[0] == 1:
-                parent = None
-                parent = insert_row(my_game, parent, row_index, bh.gameRounds_t.index(bh.gameRounds_t[index]) + 1)
-            else:
-                my_game.after(2000, insert_row,my_game, parent, row_index, bh.gameRounds_t.index(bh.gameRounds_t[index])+1)
-    my_game.after(2000, fill_table_template,my_game,index+1)
+        if row_index[0] == 1:
+            parent = None
+            parent = insert_row(my_game, parent, row_index, bh.gameRounds_t.index(bh.gameRounds_t[index]) + 1)
+        else:
+            my_game.after(2000, insert_row, my_game, parent, row_index,
+                          bh.gameRounds_t.index(bh.gameRounds_t[index]) + 1)
+    my_game.after(2000, fill_table_template, my_game, index + 1)
 
 
-
-
-def fill_table_template2(my_game,index):
+def fill_table_template2(my_game, index):
     parent = None
-    global indexpar
+    global par_index
 
     if index >= (len(bh.gameRounds_t)):
         return
 
     for row_index in bh.gameRounds_t[index]:
-            if row_index[0] == 1:
-                parent = None
-                parent = insert_row2(my_game, parent, row_index, indexpar)
-            else:
-                my_game.after(2000, insert_row2,my_game, parent, row_index, indexpar)
-    my_game.after(2000, fill_table_template2,my_game,index+1)
-
+        if row_index[0] == 1:
+            parent = None
+            parent = insert_row2(my_game, parent, row_index, par_index)
+        else:
+            my_game.after(2000, insert_row2, my_game, parent, row_index, par_index)
+    my_game.after(2000, fill_table_template2, my_game, index + 1)
 
 
 root.mainloop()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"""
-listData=[('Guess','NumberGuessed ','Bh ','Nh ','NumberGuessed ','Bh ','Nh'),
-          (1,"","","","","",""),
-          (2,"","","","","",""),
-          (3,"","","","","",""),
-          (4,"","","","","",""),
-          (5,"","","","","",""),
-          (6,"","","","","",""),
-          (7,"","","","","",""),
-          (8,"","","","","",""),
-          (9,"","","","","",""),
-          (10,"","","","","","")]
-
-##
-
-
-def disable_entry(e):
-   e.config(state= "disabled")
-
-def color_bg1(e):
-    e.config(disabledbackground="red")
-
-def color_bg2(e):
-    e.config(disabledbackground="green")
-#
-
-
-def createGameTable():
-    for i in range(7):
-        for j in range(7):
-            if(j>3):
-               e = Entry(test, width=15, fg='red', font=('Arial', 12, 'bold'))
-            else:
-               e = Entry(test, width=15, fg='blue', font=('Arial', 12, 'bold'))
-            e.grid(row=i,column=j)
-            e.insert(END,listData[i][j])
-            if(i>0):
-                disable_entry(e)
-            # if( j>0 and j<=3):
-            #     color_bg1(e)
-            # else:
-            #     color_bg2(e)
-
-            # e.insert(END,listData[])
-
-"""
-
-
-
-
-
-
-#var = StringVar()
-# gameLabel = Label(root, text="\nNumber of games " + str(NumberOfGames))
-
-# numberToGuess1=Label(root,text=str(SecretNumber))
-# numberToGuess2=Label(root,text=str(SecretNumber))
-
-# guessNumberLabel = Label(root, text="guessNum: "+ str(SecretNumber))
-# currentGuessLabel = Label(root, text="guess: ")
-# nbLabel = Label(root, text="nb: ")
-# nhLabel = Label(root, text="nh: ")
-# spaceLabel = Label(root, text="                     ")
-#
-#
-#
-# guessNumberLabel2 = Label(root, text="guessNum: " + str(SecretNumber))
-# currentGuessLabel2 = Label(root, text="guess:")
-# nbLabel2 = Label(root, text="nb:")
-# nhLabel2 = Label(root, text="nh:")
-
-
-#def democolorChange():b1.configure(bg="red",fg="yellow")
-
-#labels = []
-##def create_label(NumberOfGames):
-    ##NumberOfGames=NumberOfGames+1
-    # count = len(root.winfo_children())
-    ##label = tk.Label(root, text=f"Label #{NumberOfGames}")
-    ##label.grid(row=NumberOfGames,column=1,sticky=W,pady=2)
-    ##labels.append(label)##
-
-
-#b1=Button(root,text='button1',command=createGameTable())
-
-
-
-
-
-
-
-
-#b1=Button(root,text='button1',command=createGameTable())
-
-
-
-
-
-
-
-
-# b2=Button(root,text='Press for new label',command=create_label(NumberOfGames))
-#NumberOfGames=NumberOfGames+1
-
-# numberToGuess1.grid(row=0, column=0, sticky="", pady=2, columnspan=1)
-# numberToGuess2.grid(row=0, column=6, sticky="", pady=2,columnspan=1)
-
-# guessNumberLabel.grid(row=1, column=0, sticky=W, pady=2)
-# currentGuessLabel.grid(row=1, column=1, sticky=W, pady=2)
-# nbLabel.grid(row=1, column=3, sticky=W, pady=2)
-# nhLabel.grid(row=1, column=4, sticky=W, pady=2)
-# b1.grid(row=10, column=5, sticky=W, pady=2)
-# # b2.grid(row=2,column=2,sticky=W,pady=2)
-#
-# spaceLabel.grid(row=1, column=5, sticky=W, pady=2)
-#
-# guessNumberLabel2.grid(row=1, column=6, sticky=E, pady=2)
-# currentGuessLabel2.grid(row=1, column=7, sticky=E, pady=2)
-# nbLabel2.grid(row=1, column=8, sticky=E, pady=2)
-# nhLabel2.grid(row=1, column=9, sticky=E, pady=2)
-#
-#
-# separator = Separator(root, orient='horizontal')
-# separator.place(relx=0, rely=1.0, relwidth=1, relheight=1)
-
-# -------------------------------------------------------------
-
-# def create_circle(x, y, r, canvas): #center coordinates, radius
-#     x0 = x - r
-#     y0 = y - r
-#     x1 = x + r
-#     y1 = y + r
-#     return canvas.create_oval(x0, y0, x1, y1)
-
-# """canvasArray=[]
-# for i in COLORS:
-#     canvas = Canvas(root,width=200, height=200, bg='white')
-#     canvas.pack(expand=YES, fill=BOTH,side="left")
-#     # canvas.grid(row=1,column=i)
-#     canvas.create_oval(10, 10, 30, 30, width=2, fill=i)
-#     canvas.bind('<Button-1>',canvas_Click_event)
-#     # canvas.grid(row=0,column=i)
-#     canvasArray.append(canvas)
-#     # canvas.grid(row=0,column=i)"""
-
-# count=0
-# def add_line():
-#     global count
-#     count+=1
-#     if(count<=1):
-#         tk.Label(text='Label %d'% count +'Label %d'% count+'Label %d'% count+'Label %d'% count).pack(side=)
-#         tk.Label(text='Label %d'% count +'Label %d'% count+'Label %d'% count+'Label %d'% count).pack(side=RIGHT)
-#     else:
-#         tk.Label(text='').pack(side=TOP)
-
-# tk.Label(text="").pack(side=tk.CENTER)
-# tk.Button(root,text='button1',command=add_line).pack()
