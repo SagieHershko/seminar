@@ -10,6 +10,12 @@ from bh import startgamebh
 root = tk.Tk()
 gamesNum=0
 digsNum = 0
+avgP1 = 0
+
+avgP2 = 0
+guessNum=0
+
+
 flag=0
 selected_digits = IntVar()
 int_var = IntVar()
@@ -226,9 +232,9 @@ def createGameTable():
     p2_game.heading("Nh_P2", text="Nh_P2", anchor=CENTER)
     p2_game.heading("Table_Size_P2", text="Table_Size_P2", anchor=CENTER)
 
-
+    startindex = int(gamesNum)
     fill_table_template(p1_game,0)
-    fill_table_template(p2_game,0)
+    fill_table_template2(p2_game,startindex)
 
     p2_game.pack()
     p1_game.pack()
@@ -239,9 +245,6 @@ def createGameTable():
 #
 # def sendResult(T):
 #     fill_table_templet(my_game)
-
-def show_game_num(gamenum):
-    messagebox.showwarning("New game!", "This is game number: " +str(gamesNum) )
 
 #
 # def fill_this_game_children(my_game, parentgame, row_index):
@@ -281,52 +284,45 @@ def insert_row(my_game, parent, values, game_index):
     return parent
 
 
-# def divideGamerounds(gameRounds_t):
-#     divider=len(gameRounds_t)/2
-#     for i in gameRounds_t:
-#
+def insert_row2(my_game, parent, values, game_index):
+    #root.after(2000,insert_row,my_game, parent, row_index, bh.gameRounds_t.index(game_index)+1)
+    if parent:
+        my_game.insert(parent, index='end', text='', values=values)
+    else:
+        #parent = None
+        parent = my_game.insert(parent='', index='end', text=game_index, values=values)
+    return parent
 
 
 def fill_table_template(my_game,index):
-    # divideGamerounds(bh.gameRounds_t)
-    """if index==0:
-        i=0
-        j=0
-        gameRoundsP1=[]
-        gameRoundsP2=[]
-        divider=len(bh.gameRounds_t)/2
-        for bh.gameRounds_t in range(divider):
-            gameRoundsP1[i]=bh.gameRounds_t[i]
-            i+=1
-        for bh.gameRounds_t in range(divider,len(bh.gameRounds_t)):
-            gameRoundsP2[j]=bh.gameRounds_t[j]
-            j+=1
-"""
     parent = None
-    global flag
-    # def loop(index):
-    #     #my_game.after(2000,loop)
-    #     index=index
-    #     inside_loop(index)
-    # for game_index in bh.gameRounds_t:
-        # def test(game_index):
-        #     root.after(2000, test, game_index)
-    # def inside_loop(index):
-    if index>=len(bh.gameRounds_t):
-        #flag=2
-        #canva_type(flag)
-
+    if index >= (len(bh.gameRounds_t)/2):
         return
     for row_index in bh.gameRounds_t[index]:
             if row_index[0] == 1:
                 parent = None
-                # parent = insert_row(my_game, parent, row_index, bh.gameRounds_t.index(game_index)+1)
                 parent = insert_row(my_game, parent, row_index, bh.gameRounds_t.index(bh.gameRounds_t[index]) + 1)
             else:
-                #insert_row(my_game, parent, row_index, bh.gameRounds_t.index(game_index)+1)
-                # my_game.after(2000, insert_row,my_game, parent, row_index, bh.gameRounds_t.index(game_index)+1)
                 my_game.after(2000, insert_row,my_game, parent, row_index, bh.gameRounds_t.index(bh.gameRounds_t[index])+1)
     my_game.after(2000, fill_table_template,my_game,index+1)
+
+
+
+
+def fill_table_template2(my_game,index):
+    parent = None
+    if index >= (len(bh.gameRounds_t)):
+        return
+
+    for row_index in bh.gameRounds_t[index]:
+            if row_index[0] == 1:
+                parent = None
+                parent = insert_row2(my_game, parent, row_index, bh.gameRounds_t.index(bh.gameRounds_t[index]) + 1)
+            else:
+                my_game.after(2000, insert_row2,my_game, parent, row_index, bh.gameRounds_t.index(bh.gameRounds_t[index])+1)
+    my_game.after(2000, fill_table_template2,my_game,index+1)
+
+
 
 root.mainloop()
 
