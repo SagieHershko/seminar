@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import *
-from tkinter import ttk
+from tkinter import ttk, messagebox
 
 import bh
 from bh import startgamebh
@@ -239,10 +239,15 @@ def insert_row2(my_game, parent, values, game_index):
 
 def fill_table_template(my_game, index):
     parent = None
+    global guessNum_p1
     if index >= (len(bh.gameRounds_t) / 2):
+        messagebox.showinfo("showinfo", " " + str(guessNum_p1))
+
         return
     for row_index in bh.gameRounds_t[index]:
         if row_index[0] == 1:
+            guessNum_p1 = guessNum_p1+bh.gameRounds_t.index(bh.gameRounds_t[index-1])
+            #print(guessNum_p1)
             parent = None
             parent = insert_row(my_game, parent, row_index, bh.gameRounds_t.index(bh.gameRounds_t[index]) + 1)
         else:
