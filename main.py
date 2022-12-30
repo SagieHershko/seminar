@@ -26,8 +26,8 @@ greenC = canvas.create_text(116, 50, text="This process can take some seconds to
 COLORS = ['blue', 'green', 'red', 'purple', 'yellow']
 global parent
 
-spinboxdig = tk.Spinbox(root, from_=4, to=8, textvariable=selected_digits, width=4, wrap=True, state="readonly")
-spinboxgames = ttk.Spinbox(root, textvariable=int_var, from_=1, to=100, width=4, wrap=True, state="readonly")
+spinbox_dig = tk.Spinbox(root, from_=4, to=8, textvariable=selected_digits, width=4, wrap=True, state="readonly")
+spinbox_games = ttk.Spinbox(root, textvariable=int_var, from_=1, to=100, width=4, wrap=True, state="readonly")
 
 
 def start_window():
@@ -48,12 +48,12 @@ def start_window():
 
 
 def spinbox_digits():
-    spinboxdig.pack()
+    spinbox_dig.pack()
 
 
 def spinbox_gamesNum():
-    spinboxgames.set(10)
-    spinboxgames.pack()
+    spinbox_games.set(10)
+    spinbox_games.pack()
 
 
 def real_start():
@@ -92,8 +92,8 @@ def start_game():
     global gamesNum
     global digsNum
     global flag
-    gamesNum = int(spinboxgames.get())
-    digsNum = int(spinboxdig.get())
+    gamesNum = int(spinbox_games.get())
+    digsNum = int(spinbox_dig.get())
     if digsNum > 4:
         canva_type(flag)
         root.after(1000, real_start)
@@ -137,7 +137,6 @@ def win_funcs(tk_window, tk_window2):
     tk_window.resizable(False, False)
     tk_window.title('Player one window')
     style = ttk.Style(tk_window)
-    # set ttk theme to "clam" which support the fieldbackground option
     style.theme_use("clam")
     style.configure("Treeview", background="black",
                     fieldbackground="76b5c5", foreground="white")
@@ -146,7 +145,6 @@ def win_funcs(tk_window, tk_window2):
     tk_window2.attributes('-topmost', True)
     tk_window2.resizable(False, False)
     style = ttk.Style(tk_window2)
-    # set ttk theme to "clam" which support the fieldbackground option
     style.theme_use("clam")
     style.configure("Treeview", background="blue",
                     fieldbackground="#blue", foreground="white", borderwidth=2, separatorcolor='white')
