@@ -159,6 +159,12 @@ def clean_Treeview(treeview):
     """
     treeview.delete(*treeview.get_children())
 
+def add_scrollbar(tk, treeview):
+    treeScroll = ttk.Scrollbar(tk)
+    treeScroll.configure(command=treeview.yview)
+    treeview.configure(yscrollcommand=treeScroll.set)
+    treeScroll.pack(side=RIGHT, fill=BOTH)
+
 
 def createGameTable():
     """
@@ -170,6 +176,9 @@ def createGameTable():
 
     p1_game = ttk.Treeview(p1_gameTK)
     p2_game = ttk.Treeview(p2_gameTK)
+
+    add_scrollbar(p1_gameTK, p1_game)
+    add_scrollbar(p2_gameTK, p2_game)
 
     p1_game['columns'] = ('Guess', 'NumberGuessed_P1', 'Bh_P1', 'Nh_P1', 'Table_Size_P1')
     p2_game['columns'] = ('Guess', 'NumberGuessed_P2', 'Bh_P2', 'Nh_P2', 'Table_Size_P2')
