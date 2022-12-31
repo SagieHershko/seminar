@@ -48,7 +48,6 @@ def start_window():
 
 
 def spinbox_digits():
-    spinbox_dig.set(4)
     spinbox_dig.pack()
 
 
