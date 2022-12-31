@@ -159,10 +159,17 @@ def clean_Treeview(treeview):
     """
     treeview.delete(*treeview.get_children())
 
-def add_scrollbar(tk, treeview):
-    treeScroll = ttk.Scrollbar(tk)
-    treeScroll.configure(command=treeview.yview)
-    treeview.configure(yscrollcommand=treeScroll.set)
+
+def add_scrollbar(tk_name, treeview_name):
+    """
+    Adds a scrollbar to the given treeview widget.
+
+    :param: Tkinter widget tk_name: The main Tkinter window.
+        treeview treeview_name: The treeview widget to which the scrollbar will be added.
+    """
+    treeScroll = ttk.Scrollbar(tk_name)
+    treeScroll.configure(command=treeview_name.yview)
+    treeview_name.configure(yscrollcommand=treeScroll.set)
     treeScroll.pack(side=RIGHT, fill=BOTH)
 
 
