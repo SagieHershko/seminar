@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import *
-from tkinter import ttk, messagebox
+from tkinter import ttk
 
 import bh
 from bh import startgamebh
@@ -69,7 +69,8 @@ def real_start():
         Notes:
         - The `startgamebh` function is called with the `digsNum` and `gamesNum` to start a new game of BH.
         - The `createGameTable` function is called to create a the Treeview widgets.
-        - After the game finishes, the canva_type function is called with the value 2 as an argument that will show the results of the game.
+        - After the game finishes, the canva_type function is called with the value 2 as an argument that will show the
+        results of the game.
         """
     global par_index
     par_index = 1
@@ -91,7 +92,8 @@ def canva_type(flag):
      Notes:
      - If flag is 0, the canvas is displayed with its default appearance.
      - If flag is 1, the function does nothing.
-     - If flag is 2, the canvas's background color is changed to green and a message is displayed indicating the winner and their average number of guesses.
+     - If flag is 2, the canvas's background color is changed to green and a message is displayed indicating the winner
+     and their average number of guesses.
      """
     if flag == 0:
         canvas.pack()
@@ -262,7 +264,8 @@ def insert_row(my_game, parent, values, game_index):
 
     Notes:
     - If a parent is provided, the new row will be inserted as a child of the parent.
-    - If no parent is provided, the new row will be inserted as a top-level item and the game_index will be displayed as the text for the item.
+    - If no parent is provided, the new row will be inserted as a top-level item and the game_index will be displayed as
+     the text for the item.
     """
     if parent:
         my_game.insert(parent, index='end', text='', values=values)
@@ -286,7 +289,8 @@ def insert_row2(my_game, parent, values, game_index):
 
     Notes:
     - If a parent is provided, the new row will be inserted as a child of the parent.
-    - If no parent is provided, the new row will be inserted as a top-level item and the game_index will be displayed as the text for the item.
+    - If no parent is provided, the new row will be inserted as a top-level item and the game_index will be displayed as
+     the text for the item.
     """
     global par_index
     if parent:
@@ -309,9 +313,12 @@ def fill_table_template(my_game, index):
     None
 
     Notes:
-    - If the index is greater than or equal to the length of the `bh.gameRounds_t` list divided by 2, the function returns without doing anything.
-    - For each row of data in the `bh.gameRounds_t` list at the given index, the function inserts a new row into the Treeview widget.
-    - If the first element of the row is 1, a new top-level row is inserted and the `guessNum_p1` variable is incremented by the index of the previous game.
+    - If the index is greater than or equal to the length of the `bh.gameRounds_t` list divided by 2, the function
+        returnswithout doing anything.
+    - For each row of data in the `bh.gameRounds_t` list at the given index, the function inserts a new row into the
+        Treeview widget.
+    - If the first element of the row is 1, a new top-level row is inserted and the `guessNum_p1` variable is
+        incremented by the index of the previous game.
     - If the first element of the row is not 1, a new child row is inserted with a delay of 2 seconds.
     - After inserting all rows for the current game, the function is called again with the index incremented by 1.
     """
@@ -343,9 +350,12 @@ def fill_table_template2(my_game, index):
     None
 
     Notes:
-    - If the index is greater than or equal to the length of the `bh.gameRounds_t` list divided by 2, the function returns without doing anything.
-    - For each row of data in the `bh.gameRounds_t` list at the given index, the function inserts a new row into the Treeview widget.
-    - If the first element of the row is 1, a new top-level row is inserted and the `guessNum_p1` variable is incremented by the index of the previous game.
+    - If the index is greater than or equal to the length of the `bh.gameRounds_t` list divided by 2, the function
+        returns without doing anything.
+    - For each row of data in the `bh.gameRounds_t` list at the given index, the function inserts a new row into the
+        Treeview widget.
+    - If the first element of the row is 1, a new top-level row is inserted and the `guessNum_p1` variable is
+        incremented by the index of the previous game.
     - If the first element of the row is not 1, a new child row is inserted with a delay of 2 seconds.
     - After inserting all rows for the current game, the function is called again with the index incremented by 1.
     """
