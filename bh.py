@@ -8,6 +8,8 @@ Number = 0
 SecretNumber = 0
 Zero = True
 gameRounds_t = []
+winner = 0
+winner_avg=0
 
 class BH:
 
@@ -137,12 +139,52 @@ def main():
  #   print("average number of guesses for ", \
  #         str(NumberOfGames), " games is: ", \
  #         sum(l)/len(l))
+    total_p1 = 0
+    total_p2 = 0
+    games_per_player = NumberOfGames/2
+    global winner_avg
+    global winner
 
-    avarageStr = "average number of guesses for ", \
-          str(NumberOfGames), " games is: ", \
-          sum(l)/len(l)
+    for gameindex in range(0, int(games_per_player)):
+        total_p1 = total_p1+ l[gameindex]
+    for gameindex in range(int((games_per_player)), len(l)):
+        total_p2 = total_p2 + l[gameindex]
 
-    print(avarageStr)
+
+    avg_p1 = total_p1/games_per_player
+    avarageStr_p1 = "average number of guesses for ", \
+                 str(games_per_player), \
+                 "sum of guesses for p1 is: " + str(total_p1), \
+                "The avg is: " + str(avg_p1)
+
+    avg_p2 = total_p2/games_per_player
+    avarageStr_p2 = "average number of guesses for ", \
+                 str(NumberOfGames/2), \
+                 "sum of guesses for p2 is: " + str(total_p2), \
+                "The avg is: " + str(avg_p2)
+
+    if avg_p2 == avg_p1:
+        winner_avg = avg_p1
+        winner = "draw"
+
+    if avg_p2 < avg_p1:
+        winner_avg = avg_p2
+        winner = 2
+    else:
+        winner_avg = avg_p1
+        winner = 1
+
+    print("winner is " + str(winner) + " and the avg is: " + str(winner_avg))
+
+
+    # avarageStr = "average number of guesses for ", \
+    #       str(NumberOfGames), " games is: ", \
+    #       sum(l)/len(l)
+
+    print(avarageStr_p1)
+    print(avarageStr_p2)
+
+    #print(avarageStr)
     sys.stdout.close()
 
 

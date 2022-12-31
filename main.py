@@ -43,7 +43,7 @@ def start_window():
     root.attributes('-topmost', True)
     root.geometry("250x250")
     root.resizable(False, False)
-    root.title('Bulls and pigs')
+    root.title('Bulls and Cows')
     starting_screen()
 
 
@@ -72,7 +72,7 @@ def canva_type(flag):
         return
     elif flag == 2:
         canvas.config(bg="green")
-        won_str = "Player ____ won! \nAvg guesses: ___ "
+        won_str = "Player " + str(bh.winner) + " won! \nAvg guesses: " + str(bh.winner_avg)
         canvas.itemconfig(redC, text="")
         canvas.itemconfig(greenC, text=won_str, font='Helvetica 10 bold')
         canvas.pack()
@@ -241,8 +241,6 @@ def fill_table_template(my_game, index):
     parent = None
     global guessNum_p1
     if index >= (len(bh.gameRounds_t) / 2):
-        messagebox.showinfo("showinfo", " " + str(guessNum_p1))
-
         return
     for row_index in bh.gameRounds_t[index]:
         if row_index[0] == 1:
