@@ -33,18 +33,15 @@ spinbox_games = ttk.Spinbox(root, textvariable=int_var, from_=1, to=100, width=4
 def start_window():
     """
     Create and display a Tkinter window with a title, fixed size, and non-resizable attributes.
-
-    Parameters:
-    None
-
-    Returns:
-    None
     """
     root.attributes('-topmost', True)
     root.geometry("250x250")
     root.resizable(False, False)
     root.title('Bulls and Cows')
     starting_screen()
+
+def close(win):
+   win.quit()
 
 
 def spinbox_digits():
@@ -59,12 +56,6 @@ def spinbox_gamesNum():
 def real_start():
     """
         This function starts a new game of Bulls and Cows and updates the canvas to display the results and the winner.
-
-        Parameters:
-        None
-
-        Returns:
-        None
 
         Notes:
         - The `startgamebh` function is called with the `digsNum` and `gamesNum` to start a new game of BH.
@@ -83,11 +74,7 @@ def canva_type(flag):
     """
      This function changes the appearance of the canvas based on the value of the flag.
 
-     Parameters:
-     flag (int): An integer value representing the state of the canvas.
-
-     Returns:
-     None
+     :param: int flag: An integer value representing the state of the canvas.
 
      Notes:
      - If flag is 0, the canvas is displayed with its default appearance.
@@ -112,12 +99,6 @@ def start_game():
     """
     Initialize the game with the selected number of digits and games, and display a message showing the selected values.
     If the digsNum is bigger than 4, the process can take some seconds to proceed - so show this window.
-
-    Parameters:
-    None
-
-    Returns:
-    None
     """
     global gamesNum
     global digsNum
@@ -134,12 +115,6 @@ def start_game():
 def starting_screen():
     """
     Display a screen with spinboxes and a button for selecting the number of digits and games in a game.
-
-    Parameters:
-    None
-
-    Returns:
-    None
     """
     Label(root, text="To start the game you have to choose:").pack()
     Label(root, text="How many digits would be in the number?").pack()
@@ -156,12 +131,8 @@ def win_funcs(tk_window, tk_window2):
     """
     Modify the appearance and behavior of Tkinter windows.
 
-    Parameters:
-    tk_window (Tk): The first Tkinter window to be modified.
-    tk_window2 (Tk): The second Tkinter window to be modified.
-
-    Returns:
-    None
+    :param: Tk tk_window: The first Tkinter window to be modified.
+        Tk tk_window2: The second Tkinter window to be modified.
     """
     tk_window.attributes('-topmost', True)
     tk_window.resizable(False, False)
@@ -184,11 +155,7 @@ def clean_Treeview(treeview):
     """
       Removes all lines from a Treeview widget.
 
-      Parameters:
-      treeview: The Treeview widget to be cleaned.
-
-      Returns:
-      None
+      :param: treeview: The Treeview widget to be cleaned.
     """
     treeview.delete(*treeview.get_children())
 
@@ -196,12 +163,6 @@ def clean_Treeview(treeview):
 def createGameTable():
     """
     Create and display two Tkinter windows with Treeview widgets, each containing a table with columns and headings.
-
-    Parameters:
-    None
-
-    Returns:
-    None
     """
     p1_gameTK = tk.Tk()
     p2_gameTK = tk.Tk()
@@ -253,14 +214,12 @@ def insert_row(my_game, parent, values, game_index):
     """
     This function inserts a new row into the Treeview widget of player one.
 
-    Parameters:
-    my_game (tk.Treeview): The Treeview widget where the new row will be inserted.
-    parent (tk.Treeview.Item): The parent item of the new row. If None, the new row will be a top-level item.
-    values (List[Union[str, int]]): A list of values to be displayed in the new row.
-    game_index (Union[str, int]): The index of the game for the new row.
+    :param: tk.Treeview my_game: The Treeview widget where the new row will be inserted.
+        tk.Treeview.Item parent: The parent item of the new row. If None, the new row will be a top-level item.
+        List[Union[str, int]] values: A list of values to be displayed in the new row.
+        Union[str, int] game_index: The index of the game for the new row
 
-    Returns:
-    tk.Treeview.Item: The new row that was inserted into the Treeview widget.
+    :return: tk.Treeview.Item: The new row that was inserted into the Treeview widget.
 
     Notes:
     - If a parent is provided, the new row will be inserted as a child of the parent.
@@ -278,14 +237,12 @@ def insert_row2(my_game, parent, values, game_index):
     """
     This function inserts a new row into the Treeview widget of player two.
 
-    Parameters:
-    my_game (tk.Treeview): The Treeview widget where the new row will be inserted.
-    parent (tk.Treeview.Item): The parent item of the new row. If None, the new row will be a top-level item.
-    values (List[Union[str, int]]): A list of values to be displayed in the new row.
-    game_index (Union[str, int]): The index of the game for the new row.
+    :param: tk.Treeview my_game: The Treeview widget where the new row will be inserted.
+        tk.Treeview.Item parent: The parent item of the new row. If None, the new row will be a top-level item.
+        List[Union[str, int]] values: A list of values to be displayed in the new row.
+        Union[str, int] game_index: The index of the game for the new row
 
-    Returns:
-    tk.Treeview.Item: The new row that was inserted into the Treeview widget.
+    :return: tk.Treeview.Item: The new row that was inserted into the Treeview widget.
 
     Notes:
     - If a parent is provided, the new row will be inserted as a child of the parent.
@@ -305,16 +262,12 @@ def fill_table_template(my_game, index):
     """
     This function fills a Treeview widget with rows of data for player one.
 
-    Parameters:
-    my_game (tk.Treeview): The Treeview widget to be filled with data.
-    index (int): The index of the current game being processed.
-
-    Returns:
-    None
+    :param: tk.Treeview my_game: The Treeview widget to be filled with data.
+        int index: The index of the current game being processed.
 
     Notes:
     - If the index is greater than or equal to the length of the `bh.gameRounds_t` list divided by 2, the function
-        returnswithout doing anything.
+        returns without doing anything.
     - For each row of data in the `bh.gameRounds_t` list at the given index, the function inserts a new row into the
         Treeview widget.
     - If the first element of the row is 1, a new top-level row is inserted and the `guessNum_p1` variable is
@@ -329,7 +282,6 @@ def fill_table_template(my_game, index):
     for row_index in bh.gameRounds_t[index]:
         if row_index[0] == 1:
             guessNum_p1 = guessNum_p1+bh.gameRounds_t.index(bh.gameRounds_t[index-1])
-            #print(guessNum_p1)
             parent = None
             parent = insert_row(my_game, parent, row_index, bh.gameRounds_t.index(bh.gameRounds_t[index]) + 1)
         else:
@@ -342,12 +294,8 @@ def fill_table_template2(my_game, index):
     """
     This function fills a Treeview widget with rows of data for player two.
 
-    Parameters:
-    my_game (tk.Treeview): The Treeview widget to be filled with data.
-    index (int): The index of the current game being processed.
-
-    Returns:
-    None
+    :param: tk.Treeview my_game: The Treeview widget to be filled with data.
+        int index: The index of the current game being processed.
 
     Notes:
     - If the index is greater than or equal to the length of the `bh.gameRounds_t` list divided by 2, the function
