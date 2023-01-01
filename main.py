@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import *
+from tkinter.ttk import *
 from tkinter import ttk
 
 import bh
@@ -15,7 +16,7 @@ avgP2 = 0
 guessNum_p2 = 0
 par_index = 1
 
-flag = 0
+flag_canvas = 0
 selected_digits = IntVar()
 int_var = IntVar()
 canvas = Canvas(root, width=232, height=80, bg="red")
@@ -35,7 +36,7 @@ def start_window():
     Create and display a Tkinter window with a title, fixed size, and non-resizable attributes.
     """
     root.attributes('-topmost', True)
-    root.geometry("250x250")
+    root.geometry('250x250+650+350')
     root.resizable(False, False)
     root.title('Bulls and Cows')
     starting_screen()
@@ -86,6 +87,9 @@ def canva_type(flag):
         canvas.pack()
         flag = 1
     elif flag == 1:
+        canvas.config(bg='#31363b')
+        canvas.itemconfig(redC, text="")
+        canvas.itemconfig(greenC, text="")
         return
     elif flag == 2:
         canvas.config(bg="green")
@@ -102,20 +106,31 @@ def start_game():
     """
     global gamesNum
     global digsNum
-    global flag
+    global flag_canvas
     gamesNum = int(spinbox_games.get())
     digsNum = int(spinbox_dig.get())
     if digsNum > 4:
-        canva_type(flag)
+        canva_type(0)
         root.after(1000, real_start)
     else:
+        canva_type(1)
         real_start()
+
+
+def darkstyle(root):
+    """Return a dark style to the window"""
+    style = ttk.Style(root)
+    root.tk.call('source', 'tkBreeze-master/breeze-dark/breeze-dark.tcl')
+    style.theme_use('breeze-dark')
+
+    return style
 
 
 def starting_screen():
     """
     Display a screen with spinboxes and a button for selecting the number of digits and games in a game.
     """
+    darkstyle(root)
     Label(root, text="To start the game you have to choose:").pack()
     Label(root, text="How many digits would be in the number?").pack()
     spinbox_digits()
@@ -135,6 +150,7 @@ def win_funcs(tk_window, tk_window2):
         Tk tk_window2: The second Tkinter window to be modified.
     """
     tk_window.attributes('-topmost', True)
+    tk_window.geometry('570x225+900+450')
     tk_window.resizable(False, False)
     tk_window.title('Player one window')
     style = ttk.Style(tk_window)
@@ -144,6 +160,8 @@ def win_funcs(tk_window, tk_window2):
 
     tk_window2.title('Player two window')
     tk_window2.attributes('-topmost', True)
+    tk_window2.geometry('570x225+900+200')
+
     tk_window2.resizable(False, False)
     style = ttk.Style(tk_window2)
     style.theme_use("clam")
