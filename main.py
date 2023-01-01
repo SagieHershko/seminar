@@ -24,7 +24,6 @@ redC = canvas.create_text(116, 20, text="Please be patient! ", fill="black", fon
 greenC = canvas.create_text(116, 50, text="This process can take some seconds to proceed.", fill="black",
                             font='Helvetica 7 bold')
 
-COLORS = ['blue', 'green', 'red', 'purple', 'yellow']
 global parent
 
 spinbox_dig = tk.Spinbox(root, from_=4, to=8, textvariable=selected_digits, width=4, wrap=True, state="readonly")
@@ -39,19 +38,11 @@ def start_window():
     root.geometry('250x250+650+350')
     root.resizable(False, False)
     root.title('Bulls and Cows')
+    dark_style(root)
     starting_screen()
 
 def close(win):
    win.quit()
-
-
-def spinbox_digits():
-    spinbox_dig.pack()
-
-
-def spinbox_gamesNum():
-    spinbox_games.set(10)
-    spinbox_games.pack()
 
 
 def real_start():
@@ -117,12 +108,17 @@ def start_game():
         real_start()
 
 
-def darkstyle(root):
-    """Return a dark style to the window"""
+def dark_style(root):
+    """
+    Apply a dark theme to the given tkinter window.
+
+    :param: TK root: A tkinter Tk instance representing the window.
+
+    :return: ttk.Style: A ttk Style instance with the dark theme applied.
+    """
     style = ttk.Style(root)
     root.tk.call('source', 'tkBreeze-master/breeze-dark/breeze-dark.tcl')
     style.theme_use('breeze-dark')
-
     return style
 
 
@@ -130,12 +126,12 @@ def starting_screen():
     """
     Display a screen with spinboxes and a button for selecting the number of digits and games in a game.
     """
-    darkstyle(root)
     Label(root, text="To start the game you have to choose:").pack()
     Label(root, text="How many digits would be in the number?").pack()
-    spinbox_digits()
+    spinbox_dig.pack()
     Label(root, text="How many games would you like to play?").pack()
-    spinbox_gamesNum()
+    spinbox_games.set(10)
+    spinbox_games.pack()
     Button(root, text="Start playing!", command=start_game).pack()
 
 
@@ -154,17 +150,16 @@ def win_funcs(tk_window, tk_window2):
     tk_window.resizable(False, False)
     tk_window.title('Player one window')
     style = ttk.Style(tk_window)
-    style.theme_use("clam")
+    dark_style(tk_window)
     style.configure("Treeview", background="black",
                     fieldbackground="76b5c5", foreground="white")
 
     tk_window2.title('Player two window')
     tk_window2.attributes('-topmost', True)
     tk_window2.geometry('570x225+900+200')
-
+    dark_style(tk_window2)
     tk_window2.resizable(False, False)
     style = ttk.Style(tk_window2)
-    style.theme_use("clam")
     style.configure("Treeview", background="blue",
                     fieldbackground="#blue", foreground="white", borderwidth=2, separatorcolor='white')
 
@@ -186,7 +181,6 @@ def add_scrollbar(tk_name, treeview_name):
         treeview treeview_name: The treeview widget to which the scrollbar will be added.
     """
     treeScroll = ttk.Scrollbar(tk_name)
-    treeScroll.configure(command=treeview_name.yview)
     treeview_name.configure(yscrollcommand=treeScroll.set)
     treeScroll.pack(side=RIGHT, fill=BOTH)
 
