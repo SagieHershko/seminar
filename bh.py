@@ -10,6 +10,8 @@ Zero = True
 gameRounds_t = []
 winner = 0
 winner_avg = 0
+avg_p1 = 0
+avg_p2 = 0
 
 
 class BH:
@@ -154,12 +156,14 @@ def main():
     for gameindex in range(int((games_per_player)), len(l)):
         total_p2 = total_p2 + l[gameindex]
 
+    global avg_p1
     avg_p1 = total_p1 / games_per_player
     avarageStr_p1 = "average number of guesses for ", \
                     str(games_per_player), \
                     "sum of guesses for p1 is: " + str(total_p1), \
                     "The avg is: " + str(avg_p1)
 
+    global avg_p2
     avg_p2 = total_p2 / games_per_player
     avarageStr_p2 = "average number of guesses for ", \
                     str(NumberOfGames / 2), \

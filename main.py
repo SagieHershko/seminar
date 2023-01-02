@@ -26,7 +26,7 @@ greenC = canvas.create_text(116, 50, text="This process can take some seconds to
 
 global parent
 
-spinbox_dig = tk.Spinbox(root, from_=4, to=8, textvariable=selected_digits, width=4, wrap=True, state="readonly")
+spinbox_dig = ttk.Spinbox(root, from_=4, to=8, textvariable=selected_digits, width=4, wrap=True, state="readonly")
 spinbox_games = ttk.Spinbox(root, textvariable=int_var, from_=1, to=100, width=4, wrap=True, state="readonly")
 
 
@@ -84,7 +84,8 @@ def canva_type(flag):
         return
     elif flag == 2:
         canvas.config(bg="green")
-        won_str = "Player " + str(bh.winner) + " won! \nAvg guesses: " + str(bh.winner_avg)
+        avg_to_str = float('%.2f' % (bh.winner_avg))
+        won_str = "Player " + str(bh.winner) + " won! \nAvg guesses: "+ str(avg_to_str)
         canvas.itemconfig(redC, text="")
         canvas.itemconfig(greenC, text=won_str, font='Helvetica 10 bold')
         canvas.pack()
@@ -128,6 +129,7 @@ def starting_screen():
     """
     Label(root, text="To start the game you have to choose:").pack()
     Label(root, text="How many digits would be in the number?").pack()
+    spinbox_dig.set(4)
     spinbox_dig.pack()
     Label(root, text="How many games would you like to play?").pack()
     spinbox_games.set(10)
@@ -305,10 +307,13 @@ def fill_table_template(my_game, index):
     """
     parent = None
     global guessNum_p1
+    # global
     if index >= (len(bh.gameRounds_t) / 2):
         return
     for row_index in bh.gameRounds_t[index]:
         if row_index[0] == 1:
+            # for child in my_game.get_children(row_index[0]):
+
             guessNum_p1 = guessNum_p1+bh.gameRounds_t.index(bh.gameRounds_t[index-1])
             parent = None
             parent = insert_row(my_game, parent, row_index, bh.gameRounds_t.index(bh.gameRounds_t[index]) + 1)
