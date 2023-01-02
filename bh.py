@@ -12,7 +12,9 @@ winner = 0
 winner_avg = 0
 avg_p1 = 0
 avg_p2 = 0
-
+p1_winner = 0
+p2_winner = 0
+draw_number = 0
 
 class BH:
 
@@ -150,12 +152,18 @@ def main():
     games_per_player = NumberOfGames / 2
     global winner_avg
     global winner
+    guess_p1_per_game =[]
+    guess_p2_per_game =[]
 
     for gameindex in range(0, int(games_per_player)):
+        guess_p1_per_game.insert(gameindex,l[gameindex])
         total_p1 = total_p1 + l[gameindex]
+
     for gameindex in range(int((games_per_player)), len(l)):
+        guess_p2_per_game.insert(gameindex,l[gameindex])
         total_p2 = total_p2 + l[gameindex]
 
+    winner_counter(guess_p1_per_game, guess_p2_per_game)
     global avg_p1
     avg_p1 = total_p1 / games_per_player
     avarageStr_p1 = "average number of guesses for ", \
@@ -188,6 +196,22 @@ def main():
 
     # print(avarageStr)
     sys.stdout.close()
+
+def winner_counter(guess_p1_per_game,guess_p2_per_game):
+    global p1_winner
+    global p2_winner
+    global draw_number
+    p1_winner = 0
+    p2_winner = 0
+    draw_number = 0
+    for index in range(len(guess_p1_per_game)):
+        if guess_p1_per_game[index] > guess_p2_per_game[index]:
+            p2_winner = p2_winner+1
+        elif guess_p1_per_game[index] < guess_p2_per_game[index]:
+            p1_winner = p1_winner+1
+        elif guess_p1_per_game[index] == guess_p2_per_game[index]:
+            draw_number = draw_number + 1
+
 
 
 def startgamebh(user_digs, user_games):

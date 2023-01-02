@@ -20,7 +20,7 @@ flag_canvas = 0
 selected_digits = IntVar()
 int_var = IntVar()
 canvas = Canvas(root, width=232, height=80, bg="red")
-redC = canvas.create_text(116, 20, text="Please be patient! ", fill="black", font='Helvetica 10 bold')
+redC = canvas.create_text(116, 20, text="Please be patient! ", fill="black", font='Helvetica 9 bold')
 greenC = canvas.create_text(116, 50, text="This process can take some seconds to proceed.", fill="black",
                             font='Helvetica 7 bold')
 
@@ -59,7 +59,7 @@ def real_start():
     par_index = 1
     startgamebh(digsNum, gamesNum)
     createGameTable()
-    root.after(2000 * gamesNum, canva_type, 2)
+    root.after(1500 * gamesNum, canva_type, 2)
 
 
 def canva_type(flag):
@@ -84,11 +84,25 @@ def canva_type(flag):
         return
     elif flag == 2:
         canvas.config(bg="green")
-        avg_to_str = float('%.2f' % (bh.winner_avg))
-        won_str = "Player " + str(bh.winner) + " won! \nAvg guesses: "+ str(avg_to_str)
-        canvas.itemconfig(redC, text="")
-        canvas.itemconfig(greenC, text=won_str, font='Helvetica 10 bold')
+        draw_num = gamesNum-bh.p1_winner-bh.p2_winner
+        winner_avg_to_str = float_to_str(bh.winner_avg)
+        if bh.p2_winner==bh.p1_winner:
+            canvas.config(bg="yellow")
+
+        won_str = "\nPlayer " + str(bh.winner) + " won! \nAvg guesses: " + winner_avg_to_str + "\nPlayer 1 wons: " + str(bh.p1_winner) + " | Player 2 wons: " + str(bh.p2_winner) + "\nDraw number: " + str(draw_num) + "\n"
+        #canvas.itemconfig(redC, text="")
+        canvas.itemconfig(redC, text=won_str, anchor="center")
+        canvas.moveto(redC, 5, -6)
+        avg_str = "Avg of player one: " + float_to_str(bh.avg_p1) + " | Avg of player two: " + float_to_str(bh.avg_p2)
+
+        canvas.itemconfig(greenC, text=avg_str, font='Helvetica 7 bold')
+        canvas.moveto(greenC, 6, 67)
         canvas.pack()
+
+
+
+def float_to_str(float_nunber):
+    return str(float('%.2f' % float_nunber))
 
 
 def start_game():
@@ -318,9 +332,9 @@ def fill_table_template(my_game, index):
             parent = None
             parent = insert_row(my_game, parent, row_index, bh.gameRounds_t.index(bh.gameRounds_t[index]) + 1)
         else:
-            my_game.after(2000, insert_row, my_game, parent, row_index,
+            my_game.after(1500, insert_row, my_game, parent, row_index,
                           bh.gameRounds_t.index(bh.gameRounds_t[index]) + 1)
-    my_game.after(2000, fill_table_template, my_game, index + 1)
+    my_game.after(1500, fill_table_template, my_game, index + 1)
 
 
 def fill_table_template2(my_game, index):
@@ -351,8 +365,8 @@ def fill_table_template2(my_game, index):
             parent = None
             parent = insert_row2(my_game, parent, row_index, par_index)
         else:
-            my_game.after(2000, insert_row2, my_game, parent, row_index, par_index)
-    my_game.after(2000, fill_table_template2, my_game, index + 1)
+            my_game.after(1500, insert_row2, my_game, parent, row_index, par_index)
+    my_game.after(1500, fill_table_template2, my_game, index + 1)
 
 
 root.mainloop()
