@@ -198,6 +198,12 @@ def main():
     sys.stdout.close()
 
 def winner_counter(guess_p1_per_game,guess_p2_per_game):
+    """
+    A function that counts the number of wins and draws in a game.
+
+    :params: List guess_p1_per_game a list of integers representing the guesses made by player 1 in each game.
+        List guess_p2_per_game a list of integers representing the guesses made by player 2 in each game.
+    """
     global p1_winner
     global p2_winner
     global draw_number

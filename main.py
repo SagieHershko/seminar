@@ -41,9 +41,6 @@ def start_window():
     dark_style(root)
     starting_screen()
 
-def close(win):
-   win.quit()
-
 
 def real_start():
     """
@@ -70,9 +67,10 @@ def canva_type(flag):
 
      Notes:
      - If flag is 0, the canvas is displayed with its default appearance.
-     - If flag is 1, the function does nothing.
-     - If flag is 2, the canvas's background color is changed to green and a message is displayed indicating the winner
-     and their average number of guesses.
+     - If flag is 1, the function will reset the canvas.
+     - If flag is 2, the canvas's background color is changed to green and a message is displayed indicating the winner,
+      their average number of guesses and other statistics. If There is draw between the two players - the canvas color
+      will change to yellow.
      """
     if flag == 0:
         canvas.pack()
@@ -90,11 +88,9 @@ def canva_type(flag):
             canvas.config(bg="yellow")
 
         won_str = "\nPlayer " + str(bh.winner) + " won! \nAvg guesses: " + winner_avg_to_str + "\nPlayer 1 wons: " + str(bh.p1_winner) + " | Player 2 wons: " + str(bh.p2_winner) + "\nDraw number: " + str(draw_num) + "\n"
-        #canvas.itemconfig(redC, text="")
         canvas.itemconfig(redC, text=won_str, anchor="center")
         canvas.moveto(redC, 5, -6)
         avg_str = "Avg of player one: " + float_to_str(bh.avg_p1) + " | Avg of player two: " + float_to_str(bh.avg_p2)
-
         canvas.itemconfig(greenC, text=avg_str, font='Helvetica 7 bold')
         canvas.moveto(greenC, 6, 67)
         canvas.pack()
@@ -102,6 +98,13 @@ def canva_type(flag):
 
 
 def float_to_str(float_nunber):
+    """
+    Converts a float number to a string, rounded to two decimal points.
+
+    :param: float float_number: The float number to be converted to a string.
+
+    :return: The float number as a string, rounded to two decimal points - converted to str
+    """
     return str(float('%.2f' % float_nunber))
 
 
