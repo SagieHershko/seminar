@@ -21,7 +21,9 @@ You must choose the number of games each player will play (remember that this is
 ![image](https://user-images.githubusercontent.com/12784722/216627123-9691cc0a-4ef0-4354-b563-0c65ec45392e.png)
 
 The details of each game will appear in the hierarchy under the game number. A double click on the game line/on the small arrow will open the game guesses for us.
-The line describing the last guess is colored green. Each guess contains the following details:
+The line describing the last guess is colored green. 
+
+Each guess contains the following details:
 
 The guess number - The number the player guessed in this round
 
