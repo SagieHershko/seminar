@@ -1,5 +1,4 @@
-**What is Bulls and Cows/ MasterMind game?
-**
+**What is Bulls and Cows/ MasterMind game?**
 
 Bulls and Cows (also known as MasterMind) is a code-breaking mind or paper and pencil game for two or more players, predating the commercially marketed board game Mastermind and the hit word game Wordle.
 The game is played in turns by two opponents who aim to decipher the other's secret code by trial and error.
@@ -7,8 +6,7 @@ The game is played in turns by two opponents who aim to decipher the other's sec
 Through the various guesses, the guesser is supposed to progress by trial, error and drawing conclusions, until he succeeds in cracking the opponent's number. The first to succeed in this guess is crowned the winner of the round.
 
 
-**In our game:
-**
+**In our game:**
 ![image](https://user-images.githubusercontent.com/12784722/216626719-c624aa4a-9bbb-42e5-8fd2-dab19693135f.png)
 
 Choose the number of digits for the drawn number, which you want the computers to guess each round.
